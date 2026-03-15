@@ -1,0 +1,23 @@
+<div class="my-properties-container">
+  <h2>My Properties</h2>
+  <a routerLink="/add-property" class="add-property-button">Add New Property</a>
+  <div *ngIf="myProperties.length > 0; else noProperties" class="property-list">
+    <div *ngFor="let property of myProperties" class="property-card">
+      <div class="property-details">
+        <h3>{{ property.name }}</h3>
+        <p><strong>Type:</strong> {{ property.type }}</p>
+        <p><strong>Price:</strong> ${{ property.price }}/month</p>
+        <p><strong>Location:</strong> {{ property.location }}</p>
+        <p *ngIf="property.rented"><strong>Status:</strong> Rented</p>
+        <p *ngIf="property.rented"><strong>Rented by:</strong> {{ getRenterEmail(property.rentedBy) }}</p>
+      </div>
+      <div class="property-actions">
+        <a [routerLink]="['/edit-property', property.id]" class="edit-button">Edit</a>
+        <button (click)="deleteProperty(property.id)" class="delete-button">Delete</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noProperties>
+    <p>You haven't added any properties yet.</p>
+  </ng-template>
+</div>

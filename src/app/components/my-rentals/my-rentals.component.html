@@ -1,0 +1,16 @@
+<div class="my-rentals-container">
+  <h2>My Rentals</h2>
+  <div *ngIf="rentedProperties.length > 0; else noRentals" class="property-list">
+    <div *ngFor="let property of rentedProperties" class="property-card">
+      <div class="property-details">
+        <h3>{{ property.name }}</h3>
+        <p><strong>Type:</strong> {{ property.type }}</p>
+        <p><strong>Price:</strong> ${{ property.price }}/month</p>
+        <p><strong>Location:</strong> {{ property.location }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noRentals>
+    <p>You haven't rented any properties yet.</p>
+  </ng-template>
+</div>

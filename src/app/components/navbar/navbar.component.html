@@ -1,0 +1,19 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">Krenter</a>
+  </div>
+  <ul class="navbar-links">
+    <li><a routerLink="/properties">Properties</a></li>
+    <ng-container *ngIf="!currentUser">
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Register</a></li>
+    </ng-container>
+    <ng-container *ngIf="currentUser">
+      <li><a routerLink="/my-rentals">My Rentals</a></li>
+      <li><a routerLink="/my-properties">My Properties</a></li>
+      <li><a routerLink="/add-property">Add Property</a></li>
+      <li><span class="welcome-message">Welcome, {{ currentUser.name }}</span></li>
+      <li><a (click)="logout()" style="cursor: pointer;">Logout</a></li>
+    </ng-container>
+  </ul>
+</nav>
