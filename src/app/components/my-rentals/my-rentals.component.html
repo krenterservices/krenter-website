@@ -1,16 +1,80 @@
 <div class="my-rentals-container">
   <h2>My Rentals</h2>
-  <div *ngIf="rentedProperties.length > 0; else noRentals" class="property-list">
-    <div *ngFor="let property of rentedProperties" class="property-card">
-      <div class="property-details">
-        <h3>{{ property.name }}</h3>
-        <p><strong>Type:</strong> {{ property.type }}</p>
-        <p><strong>Price:</strong> ${{ property.price }}/month</p>
-        <p><strong>Location:</strong> {{ property.location }}</p>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <p>Loading your rentals...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Rentals List -->
+  <div *ngIf="!isLoading && myRentals.length > 0" class="rentals-list">
+    <div *ngFor="let rental of myRentals" class="rental-card">
+      <div class="rental-header">
+        <div class="rental-title">
+          <h3>{{ rental.property?.name || 'Unknown Property' }}</h3>
+          <span class="status-badge" [class]="'status-' + getStatusColor(rental.status)">
+            {{ rental.status | uppercase }}
+          </span>
+        </div>
+      </div>
+
+      <div class="property-info">
+        <div class="info-section">
+          <h4>Property Details</h4>
+          <div class="info-item">
+            <span class="label">Type:</span>
+            <span class="value">{{ rental.property?.type }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Location:</span>
+            <span class="value">{{ rental.property?.location }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Description:</span>
+            <span class="value">{{ rental.property?.description || 'N/A' }}</span>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <h4>Rental Information</h4>
+          <div class="info-item">
+            <span class="label">Monthly Price:</span>
+            <span class="value">${{ rental.rentalPrice }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Start Date:</span>
+            <span class="value">{{ rental.startDate | date:'medium' }}</span>
+          </div>
+          <div class="info-item" *ngIf="rental.endDate">
+            <span class="label">End Date:</span>
+            <span class="value">{{ rental.endDate | date:'medium' }}</span>
+          </div>
+          <div class="info-item" *ngIf="rental.endDate && rental.status === 'active'">
+            <span class="label">Days Remaining:</span>
+            <span class="value">{{ getRemainingDays(rental.endDate) }} days</span>
+          </div>
+        </div>
+
+        <div class="info-section" *ngIf="rental.rentalDetails">
+          <h4>Additional Details</h4>
+          <div class="info-item" *ngIf="rental.rentalDetails.deposit">
+            <span class="label">Deposit:</span>
+            <span class="value">${{ rental.rentalDetails.deposit }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <ng-template #noRentals>
+
+  <!-- No Rentals State -->
+  <div *ngIf="!isLoading && myRentals.length === 0 && !errorMessage" class="empty-state">
     <p>You haven't rented any properties yet.</p>
-  </ng-template>
+    <p>Browse available properties to start renting!</p>
+    <a routerLink="/properties" class="browse-button">Browse Properties</a>
+  </div>
 </div>

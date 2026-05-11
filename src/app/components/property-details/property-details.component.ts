@@ -24,7 +24,7 @@ export class PropertyDetailsComponent implements OnInit {
   ngOnInit(): void {
     const propertyId = this.route.snapshot.paramMap.get('id');
     if (propertyId) {
-      this.property = this.propertyService.getProperty(+propertyId);
+      this.property = this.propertyService.getProperty(propertyId);
       this.isRented = this.property?.rented;
     }
   }
@@ -38,7 +38,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.showModal = false;
     if (this.property) {
       // In a real app, you'd get the user's ID from the auth service
-      this.propertyService.rentProperty(this.property.id, 1);
+      this.propertyService.rentProperty(this.property.id);
     }
   }
 

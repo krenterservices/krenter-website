@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, KrenterUser } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
 
@@ -14,8 +14,11 @@ import { Subscription } from 'rxjs';
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
-  private authSubscription!: Subscription;
-  private currentUser: any;
+  currentUser: KrenterUser | null = null;
+  isLoading = false;
+  successMessage = '';
+  errorMessage = '';
+  private authSubscription: Subscription | undefined;
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +27,8 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   ) {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['']
     });
   }
 
@@ -32,20 +36,48 @@ export class MyProfileComponent implements OnInit, OnDestroy {
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       if (user) {
         this.currentUser = user;
-        this.profileForm.patchValue(user);
+        this.profileForm.patchValue({
+          name: user.name,
+          email: user.email,
+          phone: user.phone
+        });
       }
     });
   }
 
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
+    }
   }
 
-  onSubmit() {
-    if (this.profileForm.valid) {
-      const updatedUser = { ...this.currentUser, ...this.profileForm.value };
-      this.userService.updateUser(updatedUser);
-      // Optionally, show a success message
+  async onSubmit(): Promise<void> {
+    if (this.profileForm.valid && this.currentUser) {
+      try {
+        this.isLoading = true;
+        this.errorMessage = '';
+        this.successMessage = '';
+
+        const success = await this.userService.updateUser(this.currentUser.uid, {
+          name: this.profileForm.value.name,
+          email: this.profileForm.value.email,
+          phone: this.profileForm.value.phone
+        });
+
+        if (success) {
+          this.successMessage = 'Profile updated successfully!';
+          setTimeout(() => {
+            this.successMessage = '';
+          }, 3000);
+        } else {
+          this.errorMessage = 'Failed to update profile.';
+        }
+      } catch (error) {
+        this.errorMessage = 'Error updating profile.';
+        console.error('Error updating profile:', error);
+      } finally {
+        this.isLoading = false;
+      }
     }
   }
 }

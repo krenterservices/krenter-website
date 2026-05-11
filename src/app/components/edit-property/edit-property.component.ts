@@ -13,7 +13,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EditPropertyComponent implements OnInit {
   propertyForm: FormGroup;
-  propertyId!: number;
+  propertyId: string = '';
+  isLoading = true;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -25,25 +27,60 @@ export class EditPropertyComponent implements OnInit {
       name: ['', Validators.required],
       type: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      location: ['', Validators.required]
+      location: ['', Validators.required],
+      description: [''],
+      amenities: ['']
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.propertyId = +id;
-      const property = this.propertyService.getProperty(this.propertyId);
-      if (property) {
-        this.propertyForm.patchValue(property);
+      this.propertyId = id;
+      try {
+        const property = await this.propertyService.getProperty(this.propertyId);
+        if (property) {
+          this.propertyForm.patchValue({
+            name: property.name,
+            type: property.type,
+            price: property.price,
+            location: property.location,
+            description: property.description,
+            amenities: property.amenities?.join(', ')
+          });
+        } else {
+          this.errorMessage = 'Property not found';
+        }
+      } catch (error) {
+        this.errorMessage = 'Error loading property';
+        console.error('Error loading property:', error);
+      } finally {
+        this.isLoading = false;
       }
     }
   }
 
-  onSubmit() {
-    if (this.propertyForm.valid) {
-      this.propertyService.updateProperty({ id: this.propertyId, ...this.propertyForm.value });
-      this.router.navigate(['/my-properties']);
+  async onSubmit(): Promise<void> {
+    if (this.propertyForm.valid && this.propertyId) {
+      try {
+        const amenities = this.propertyForm.value.amenities
+          ? this.propertyForm.value.amenities.split(',').map((a: string) => a.trim())
+          : [];
+
+        const success = await this.propertyService.updateProperty(this.propertyId, {
+          ...this.propertyForm.value,
+          amenities: amenities
+        });
+
+        if (success) {
+          this.router.navigate(['/my-properties']);
+        } else {
+          this.errorMessage = 'Failed to update property';
+        }
+      } catch (error) {
+        this.errorMessage = 'Error updating property';
+        console.error('Error updating property:', error);
+      }
     }
   }
 }

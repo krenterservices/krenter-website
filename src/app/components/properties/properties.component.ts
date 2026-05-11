@@ -31,7 +31,10 @@ export class PropertiesComponent implements OnInit {
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {
-    this.allProperties = this.propertyService.getProperties();
+    this.propertyService.getProperties().then(properties => {
+      this.allProperties = properties;
+    });
+    // this.allProperties = this.propertyService.getProperties();
     this.uniqueTypes = [...new Set(this.allProperties.map(p => p.type))];
     this.uniqueLocations = [...new Set(this.allProperties.map(p => p.location))];
     this.applyFiltersAndSort();

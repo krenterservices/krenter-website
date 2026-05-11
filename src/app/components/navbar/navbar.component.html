@@ -1,19 +1,43 @@
 <nav class="navbar">
   <div class="navbar-brand">
     <a routerLink="/">
-      <img src="assets/krenter-logo.png" alt="Krenter Logo" class="logo">
+      <img src="/krenter-logo.png" alt="Krenter Logo" class="logo">
     </a>
   </div>
+
   <div class="navbar-links">
-    <ul>
-      <li><a routerLink="/home">Home</a></li>
-      <li><a routerLink="/properties">Properties</a></li>
-      <li><a routerLink="/my-properties">My Properties</a></li>
-      <li><a routerLink="/my-rentals">My Rentals</a></li>
-      <li><a routerLink="/add-property">Add Property</a></li>
-      <li><a routerLink="/my-profile">Profile</a></li>
-      <li><a routerLink="/login">Login</a></li>
-      <li><a routerLink="/register">Register</a></li>
+    <ul class="nav-menu">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+      <li><a routerLink="/properties" routerLinkActive="active">Browse Properties</a></li>
+
+      <!-- Owner Links -->
+      <li *ngIf="currentUser?.role === 'owner'">
+        <a routerLink="/my-properties" routerLinkActive="active">My Properties</a>
+      </li>
+      <li *ngIf="currentUser?.role === 'owner'">
+        <a routerLink="/add-property" routerLinkActive="active">Add Property</a>
+      </li>
+
+      <!-- Renter Links -->
+      <li *ngIf="currentUser?.role === 'renter'">
+        <a routerLink="/my-rentals" routerLinkActive="active">My Rentals</a>
+      </li>
+
+      <!-- Common Links -->
+      <li *ngIf="currentUser"><a routerLink="/my-profile" routerLinkActive="active">Profile</a></li>
+      <li><a routerLink="/support" routerLinkActive="active">Support</a></li>
     </ul>
+  </div>
+
+  <div class="navbar-auth">
+    <div *ngIf="currentUser" class="user-section">
+      <span class="user-name">{{ currentUser.name }}</span>
+      <span class="user-role">{{ currentUser.role | uppercase }}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
+    </div>
+    <div *ngIf="!currentUser" class="auth-links">
+      <a routerLink="/login" class="login-link">Login</a>
+      <a routerLink="/register" class="register-link">Register</a>
+    </div>
   </div>
 </nav>
