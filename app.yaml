@@ -1,0 +1,5 @@
+runtime: nodejs
+env: standard
+handlers:
+  - url: /.*
+    script: dist/krenter-website/server/server.mjs
