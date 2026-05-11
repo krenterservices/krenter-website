@@ -15,7 +15,10 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'properties', component: PropertiesComponent },
-  { path: 'property/:id', component: PropertyDetailsComponent },
+  {
+    path: 'property/:id',
+    component: PropertyDetailsComponent,
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'support', component: SupportComponent },
