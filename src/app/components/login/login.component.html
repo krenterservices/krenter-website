@@ -1,0 +1,29 @@
+<div class="login-container">
+  <h2>Login to Krenter</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="loginError" class="error-message">
+      {{ loginError }}
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" [disabled]="isLoading">
+      <div *ngIf="emailError" class="error">
+        {{ emailError }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" [disabled]="isLoading">
+      <div *ngIf="passwordError" class="error">
+        {{ passwordError }}
+      </div>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid || isLoading">
+      <span *ngIf="!isLoading">Login</span>
+      <span *ngIf="isLoading">Logging in...</span>
+    </button>
+  </form>
+  <p class="register-link">
+    Don't have an account? <a routerLink="/register">Register here</a>
+  </p>
+</div>

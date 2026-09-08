@@ -1,0 +1,27 @@
+<div *ngIf="property" class="details-container">
+  <div class="property-header">
+    <h1>{{ property.name }}</h1>
+    <p class="location">{{ property.location }}</p>
+  </div>
+  <div class="property-gallery">
+    <div class="main-image">
+      <img src="https://via.placeholder.com/800x400" alt="{{ property.name }}">
+    </div>
+  </div>
+  <div class="property-info">
+    <h2>Details</h2>
+    <p><strong>Type:</strong> {{ property.type }}</p>
+    <p><strong>Price:</strong> ${{ property.price }}/month</p>
+    <p><strong>Description:</strong> A beautiful and modern property in a prime location. Perfect for families or professionals looking for comfort and convenience.</p>
+    <button (click)="openRentModal()" [disabled]="isRented" class="rent-button">
+      {{ isRented ? 'Rented' : 'Rent Now' }}
+    </button>
+  </div>
+</div>
+
+<app-rent-confirmation-modal
+  *ngIf="showModal"
+  [property]="property"
+  (confirm)="onConfirmRent()"
+  (cancel)="onCancelRent()">
+</app-rent-confirmation-modal>

@@ -1,0 +1,23 @@
+.my-rentals-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .property-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .property-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+  }
+}

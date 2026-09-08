@@ -1,0 +1,10 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h2>Confirm Rental</h2>
+    <p>Are you sure you want to rent <strong>{{ property.name }}</strong> for <strong>${{ property.price }}/month</strong>?</p>
+    <div class="modal-actions">
+      <button (click)="confirm.emit()" class="confirm-button">Confirm</button>
+      <button (click)="cancel.emit()" class="cancel-button">Cancel</button>
+    </div>
+  </div>
+</div>

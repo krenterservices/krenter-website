@@ -1,0 +1,2 @@
+this is a blank angular 21 project. the purpose of the app is to create a nice look and feel website for the company called Krenter which will serve as a service to connect landload to renters. the owners can add there property of any type like flat, houses etc and renter can rent them and make payment only or offline and manage other services
+

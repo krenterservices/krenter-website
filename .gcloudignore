@@ -1,0 +1,47 @@
+# This file specifies files that are *not* uploaded to Google Cloud
+# using gcloud. It follows the same syntax as .gitignore, with the addition of
+# "#!include" directives (which insert the entries of the given .gitignore-style
+# file at that point).
+#
+# For more information, run:
+#   $ gcloud topic gcloudignore
+#
+
+# Exclude common development files and directories
+.gcloudignore
+.git
+.gitignore
+.vscode/
+.idea/
+.angular/
+.editorconfig
+.prettierrc
+README.md
+FIREBASE_SETUP.md
+SUPPORT_PAGE_READY.md
+SUPPORT_PAGE_SETUP.md
+SUPPORT_PAGE_DOCUMENTATION.md
+FIREBASE_INTEGRATION_COMPLETE.md
+
+# Exclude Node.js development dependencies
+node_modules/
+
+# Exclude Angular source files and configuration
+src/
+e2e/
+karma.conf.js
+protractor.conf.js
+tsconfig.json
+tsconfig.*.json
+angular.json
+
+# Exclude all build outputs by default, then re-include the specific output needed.
+# This is crucial for SSR deployments where only the server build is needed.
+# Given app.yaml is in root and points to dist/krenter-website/server/server.mjs,
+# we need to ensure dist/krenter-website is included.
+dist/
+!/dist/krenter-website/
+
+# Ensure package.json and package-lock.json are included for server dependencies
+!package.json
+!package-lock.json
