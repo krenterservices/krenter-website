@@ -11,7 +11,7 @@ export const serverRoutes: ServerRoute[] = [
       // Example: const propertyIds = await fetchPropertyIdsFromFirestore();
       // For now, returning a static ID.
       return [{ id: '123' }]; // Replace '123' with actual property IDs
-    }
+    },
   },
   {
     path: 'edit-property/:id',
@@ -22,10 +22,10 @@ export const serverRoutes: ServerRoute[] = [
       // In a real application, you would fetch IDs from a database or API.
       // For now, returning a static ID.
       return [{ id: '456' }]; // Replace '456' with actual property IDs
-    }
+    },
   },
   {
     path: '**',
-    renderMode: RenderMode.Prerender
-  }
+    renderMode: RenderMode.Prerender,
+  },
 ];

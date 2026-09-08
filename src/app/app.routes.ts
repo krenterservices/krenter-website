@@ -25,5 +25,5 @@ export const routes: Routes = [
   { path: 'add-property', component: AddPropertyComponent, canActivate: [AuthGuard] },
   { path: 'my-properties', component: MyPropertiesComponent, canActivate: [AuthGuard] },
   { path: 'edit-property/:id', component: EditPropertyComponent, canActivate: [AuthGuard] },
-  { path: 'my-rentals', component: MyRentalsComponent, canActivate: [AuthGuard] }
+  { path: 'my-rentals', component: MyRentalsComponent, canActivate: [AuthGuard] },
 ];

@@ -5,7 +5,7 @@ import { NavbarComponent } from '../navbar/navbar.component'; // Import NavbarCo
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, NavbarComponent], // Add NavbarComponent here
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
