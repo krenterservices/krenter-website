@@ -14,7 +14,7 @@ interface RentalWithProperty extends Rental {
 @Component({
   selector: 'app-my-rentals',
   standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: './my-rentals.component.html',
   styleUrls: ['./my-rentals.component.scss']
 })
