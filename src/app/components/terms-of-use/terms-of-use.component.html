@@ -1,0 +1,489 @@
+<div class="terms-page bg-light py-5">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Terms of Use</li>
+      </ol>
+    </nav>
+
+    <!-- Header Banner -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden hero-card">
+      <div class="card-body p-4 p-md-5">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="/krenter-logo.png" alt="Krenter Logo" class="brand-logo img-fluid" style="max-height: 48px;" />
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+                User Agreement
+              </span>
+            </div>
+            <h1 class="display-5 fw-bold text-dark mb-3">Krenter Terms of Use</h1>
+            <p class="lead text-muted mb-3">
+              These Terms of Use constitute a legally binding agreement between you and Krenter, Inc. governing your access to and use of the Krenter website, services, and mobile applications.
+            </p>
+            <div class="d-flex flex-wrap gap-2 align-items-center text-secondary small">
+              <span class="fw-semibold text-dark"><i class="bi bi-calendar3 me-1"></i>Effective Date:</span> {{ effectiveDate }}
+              <span class="mx-2">•</span>
+              <span class="badge bg-danger-subtle text-danger border border-danger-subtle">Arbitration & Class Action Waiver</span>
+              <span class="badge bg-success-subtle text-success border border-success-subtle">App Store Bound</span>
+              <span class="badge bg-info-subtle text-info border border-info-subtle">PCI-DSS Compliant</span>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+            <div class="p-3 bg-white rounded-3 shadow-sm border d-inline-block text-start w-100 max-w-sm">
+              <h6 class="fw-bold mb-2 text-dark">Access Anywhere</h6>
+              <p class="small text-muted mb-3">Experience Krenter across web, iOS, and Android mobile devices.</p>
+              <div class="d-flex flex-column flex-sm-row flex-lg-column gap-2">
+                <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+                  <img src="/AppIcons/appstore.png" alt="App Store" style="height: 20px;" />
+                  <span>Download on App Store</span>
+                </a>
+                <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+                  <img src="/AppIcons/playstore.png" alt="Google Play" style="height: 20px;" />
+                  <span>Get it on Google Play</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Highlights Callout -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 highlight-card">
+      <div class="card-body p-4">
+        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-file-earmark-text text-primary me-2"></i>Key Summary of These Terms</h5>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Platform Role</h6>
+              <p class="small text-muted mb-0">Krenter provides software tools to connect landlords and tenants. We are not a real estate broker or a direct party to lease contracts.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">User Conduct</h6>
+              <p class="small text-muted mb-0">You agree to supply accurate property and rental information and abide by fair housing and real estate laws.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Secure Payments</h6>
+              <p class="small text-muted mb-0">Online rent payments are securely processed through authorized PCI-DSS compliant third-party payment gateways.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Dispute Resolution</h6>
+              <p class="small text-muted mb-0">Disputes between users and Krenter are resolved via binding individual arbitration with a class action waiver.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="row g-4">
+      <!-- Sticky Sidebar Navigation -->
+      <aside class="col-lg-3 d-none d-lg-block">
+        <div class="sticky-top toc-container p-3 bg-white rounded-4 shadow-sm border" style="top: 2rem;">
+          <h6 class="fw-bold text-uppercase text-secondary small mb-3 tracking-wide">Contents</h6>
+          <nav class="nav flex-column toc-nav small">
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-notices" (click)="scrollToSection('section-notices', $event)">1. Important Notices</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-summary" (click)="scrollToSection('section-summary', $event)">2. Services Summary</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-license" (click)="scrollToSection('section-license', $event)">3. License Grant</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-registration" (click)="scrollToSection('section-registration', $event)">4. Account Registration</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-credentials" (click)="scrollToSection('section-credentials', $event)">5. Credentials Security</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-mobile-terms" (click)="scrollToSection('section-mobile-terms', $event)">6. Mobile & App Store Terms</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-user-content" (click)="scrollToSection('section-user-content', $event)">7. User Content</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-restrictions" (click)="scrollToSection('section-restrictions', $event)">8. Restrictions</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-payments" (click)="scrollToSection('section-payments', $event)">9. Payments & Fees</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-electronic" (click)="scrollToSection('section-electronic', $event)">10. Electronic Disclosures</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-screening" (click)="scrollToSection('section-screening', $event)">11. Credit Checks & FCRA</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-relationship" (click)="scrollToSection('section-relationship', $event)">12. Landlord-Tenant Relations</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-photos" (click)="scrollToSection('section-photos', $event)">13. Property Media Rights</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-shared-info" (click)="scrollToSection('section-shared-info', $event)">14. Shared Information</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-partners" (click)="scrollToSection('section-partners', $event)">15. Third-Party Partners</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-sms" (click)="scrollToSection('section-sms', $event)">16. SMS & Text Messaging</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-ip" (click)="scrollToSection('section-ip', $event)">17. Intellectual Property</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-warranties" (click)="scrollToSection('section-warranties', $event)">18. Disclaimers & Warranties</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-liability" (click)="scrollToSection('section-liability', $event)">19. Limitation of Liability</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-indemnity" (click)="scrollToSection('section-indemnity', $event)">20. Indemnification</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-term" (click)="scrollToSection('section-term', $event)">21. Term & Termination</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-confidentiality" (click)="scrollToSection('section-confidentiality', $event)">22. Confidentiality</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-disputes" (click)="scrollToSection('section-disputes', $event)">23. Dispute Resolution</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-general" (click)="scrollToSection('section-general', $event)">24. General Provisions</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-pci" (click)="scrollToSection('section-pci', $event)">25. PCI-DSS Compliance</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-dmca" (click)="scrollToSection('section-dmca', $event)">26. DMCA Policy</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-contact" (click)="scrollToSection('section-contact', $event)">27. Contact Information</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main Terms Articles -->
+      <main class="col-lg-9">
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white text-dark terms-content">
+
+          <!-- 1. Important Notices -->
+          <section id="section-notices" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">1. IMPORTANT NOTICES & ACCEPTANCE</h2>
+            <p>
+              Krenter, Inc. (hereinafter, "<strong>Krenter</strong>," "<strong>we</strong>," "<strong>our</strong>," or "<strong>us</strong>") provides rental property management software as a service (the "<strong>Services</strong>") to landlords, property managers, owners, and tenants (collectively, "<strong>you</strong>" or "<strong>your</strong>") through its website, <a routerLink="/" class="text-primary fw-semibold">krenter.org</a> (the "<strong>Site</strong>") and mobile applications available on iOS and Android (the "<strong>App</strong>").
+            </p>
+            <p>
+              The Services are subject to the following Terms of Use ("<strong>Terms</strong>"). The following additional documents are incorporated into these Terms as if fully set forth herein: our <a routerLink="/privacy-policy" class="text-primary fw-semibold">Privacy Policy</a>, Community Guidelines, and DMCA Copyright Policy (collectively, the "<strong>Agreement</strong>").
+            </p>
+            <p>
+              By clicking "Accept," creating an account, or otherwise accessing or using the Services, you acknowledge that you have read, understand, and agree to be legally bound by this Agreement. If you are entering into this Agreement on behalf of an entity, you represent and warrant that you possess full legal authority to bind that entity. <strong>If you do not agree to all terms of this Agreement, do not access or use the Services.</strong>
+            </p>
+            <div class="alert alert-danger border-0 rounded-3 small">
+              <strong>NOTICE CONCERNING ARBITRATION:</strong> THESE TERMS CONTAIN A MANDATORY ARBITRATION CLAUSE AND A CLASS ACTION WAIVER (SEE SECTION 23). BY ACCEPTING THESE TERMS, YOU AGREE THAT DISPUTES BETWEEN YOU AND KRENTER WILL BE RESOLVED BY BINDING, INDIVIDUAL ARBITRATION, AND YOU WAIVE YOUR RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION.
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 2. Services Summary -->
+          <section id="section-summary" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">2. SERVICES SUMMARY</h2>
+            <p>
+              Krenter provides a digital property management platform connecting landlords, property owners, and renters. Key features include:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Rent Payment Management:</strong> Secure electronic rent collection via ACH bank transfer or credit/debit card, with automated receipt tracking and ledger management.</li>
+              <li class="mb-2">• <strong>Tenant Screening & Applications:</strong> Digital rental applications, pre-qualification questionnaires, and integration with credit and background reporting partners.</li>
+              <li class="mb-2">• <strong>Maintenance Ticket Tracking:</strong> In-app maintenance requests with photo/video attachments, direct communication between tenants and maintenance teams, and real-time status updates.</li>
+              <li class="mb-2">• <strong>Property & Listing Syndication:</strong> Tools for landlords to create property listings, track vacancies, and manage rental portfolios.</li>
+              <li class="mb-2">• <strong>Mobile Accessibility:</strong> Full management functionality via native iOS (Apple App Store) and Android (Google Play Store) applications.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 3. License Grant & Limitations -->
+          <section id="section-license" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">3. LICENSE GRANT & LIMITATIONS</h2>
+            <p>
+              Subject to your compliance with this Agreement, Krenter grants you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use the Services and download the App on mobile devices owned or controlled by you solely for your personal or internal business rental management purposes.
+            </p>
+            <p>
+              You agree not to copy, modify, distribute, sell, lease, reverse engineer, or create derivative works of any part of the Services. You may not bypass or attempt to bypass security measures or access portions of the platform not intended for public or authorized access.
+            </p>
+            <div class="alert alert-warning border-0 rounded-3 small">
+              <strong>NO REAL ESTATE BROKERAGE:</strong> Krenter is a technology provider and does not act as a real estate broker, leasing agent, property inspector, or legal advisor. We do not evaluate or endorse the physical condition, safety, or suitability of properties, landlords, or tenants.
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 4. Account Registration & Eligibility -->
+          <section id="section-registration" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">4. ACCOUNT REGISTRATION & ELIGIBILITY</h2>
+            <p>
+              To access primary features of the Services, such as listing properties, submitting rental applications, signing leases, or initiating rent payments, you must register for an account.
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Age Requirement:</strong> You must be at least eighteen (18) years of age to register for an account or execute transactions on Krenter. The Services are not intended for or directed to individuals under 18.</li>
+              <li class="mb-2">• <strong>Accurate Information:</strong> You agree to provide true, accurate, current, and complete information during registration and keep your account profile updated.</li>
+              <li class="mb-2">• <strong>One Account:</strong> You may not register more than one account per individual, nor may you impersonate any other person or misrepresent your affiliation with any entity.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 5. Credentials Security -->
+          <section id="section-credentials" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">5. ACCOUNT CREDENTIALS & SECURITY</h2>
+            <p>
+              You are solely responsible for maintaining the confidentiality of your login credentials (username, password, biometric access tokens). You are fully liable for all activities that occur under your account. You agree to immediately notify Krenter at <a href="mailto:support@krenter.app" class="text-primary fw-semibold">support@krenter.app</a> of any suspected unauthorized access or security breach.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 6. Mobile & App Store Terms -->
+          <section id="section-mobile-terms" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">6. MOBILE APPLICATION & APP STORE TERMS</h2>
+            <p>
+              When you download the Krenter App from the Apple App Store or Google Play Store, you acknowledge that:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• This Agreement is concluded solely between you and Krenter, and not with Apple Inc. or Google LLC. Apple and Google are not responsible for the App or its content.</li>
+              <li class="mb-2">• The license granted for the iOS App is limited to a non-transferable license to use the App on any Apple-branded products running iOS, as permitted by the Usage Rules set forth in the Apple Media Services Terms and Conditions.</li>
+              <li class="mb-2">• Standard carrier messaging, data, and telephony rates apply to your use of the App on cellular networks.</li>
+              <li class="mb-2">• In the event of any failure of the App to conform to any applicable warranty, you may notify the relevant app store; however, to the maximum extent permitted by applicable law, neither Apple nor Google has any warranty or support obligation whatsoever with respect to the App.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 7. User Content -->
+          <section id="section-user-content" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">7. USER CONTENT & PROPRIETARY LICENSE</h2>
+            <p>
+              You retain ownership of photos, listings, maintenance reports, messages, and other materials you submit through the Services ("<strong>User Content</strong>"). However, by submitting User Content, you grant Krenter a worldwide, perpetual, royalty-free, transferable, and sublicensable license to use, display, host, reproduce, and distribute your User Content solely to operate, improve, and promote the Services.
+            </p>
+            <p>
+              You warrant that you own or have obtained all necessary licenses, permissions, and rights to submit User Content, and that your User Content does not infringe upon any third-party intellectual property, privacy, or publicity rights.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 8. Restrictions -->
+          <section id="section-restrictions" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">8. PROHIBITED CONDUCT & PLATFORM RESTRICTIONS</h2>
+            <p>You agree not to use the Services to:</p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• Violate any federal, state, local, or international law, including the Fair Housing Act, FCRA, anti-discrimination statutes, or real estate licensing regulations.</li>
+              <li class="mb-2">• Post deceptive, fraudulent, false, or misleading rental property listings or tenant application credentials.</li>
+              <li class="mb-2">• Transmit malware, viruses, worms, Trojan horses, or automated scraping scripts (bots, crawlers, harvest tools).</li>
+              <li class="mb-2">• Harass, stalk, threaten, defraud, or discriminate against any landlord, tenant, or contractor.</li>
+              <li class="mb-2">• Attempt to probe, scan, test system vulnerabilities, or breach authentication mechanisms.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 9. Payments & Fees -->
+          <section id="section-payments" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">9. PAYMENTS, PROCESSING FEES & SUBSCRIPTIONS</h2>
+            <p>
+              Certain Services (such as premium landlord subscription tiers, expedited payment processing, or tenant screening reports) require payment of fees.
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Payment Processor:</strong> Financial transactions are processed via PCI-DSS compliant payment gateways. By submitting payment details, you authorize Krenter to charge your chosen payment method.</li>
+              <li class="mb-2">• <strong>Recurring Subscriptions:</strong> Landlord subscription fees renew automatically unless cancelled prior to the end of the billing cycle. Cancellations take effect at the conclusion of the current prepaid billing period.</li>
+              <li class="mb-2">• <strong>Disputed Charges:</strong> You must notify us in writing of any billing discrepancies within thirty (30) calendar days of the charge date; failure to do so waives your right to dispute the charge.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 10. Electronic Disclosures -->
+          <section id="section-electronic" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">10. ELECTRONIC COMMUNICATIONS & DISCLOSURES CONSENT</h2>
+            <p>
+              By creating an account, you consent to transact business electronically and receive all legal notices, disclosures, rent payment receipts, lease agreements, and administrative messages via electronic mail to your registered email address or through in-app notifications.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 11. Tenant Screening & FCRA -->
+          <section id="section-screening" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">11. CREDIT CHECKS, SCREENING & FCRA COMPLIANCE</h2>
+            <p>
+              When tenant screening reports (credit, criminal, or eviction checks) are generated through Krenter:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• Krenter is not a Consumer Reporting Agency as defined by the Fair Credit Reporting Act (FCRA). Reports are compiled and provided by independent third-party consumer reporting partners.</li>
+              <li class="mb-2">• <strong>Landlord Certification:</strong> Landlords certify that screening reports are requested solely for legitimate tenant evaluation purposes and that any adverse actions comply with FCRA notice obligations.</li>
+              <li class="mb-2">• <strong>Tenant Consent:</strong> Tenants authorize Krenter and its partners to retrieve and share screening information with the designated prospective landlord.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 12. Landlord-Tenant Relations -->
+          <section id="section-relationship" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">12. LANDLORD AND TENANT RELATIONSHIP</h2>
+            <p>
+              Krenter is an independent technology platform. We are not a party to any rental agreement, lease, or maintenance contract between landlords and tenants.
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Security Deposits:</strong> Disputes concerning security deposit refunds, lease terminations, damage assessments, or evictions must be resolved directly between landlord and tenant. Krenter does not hold or guarantee security deposits.</li>
+              <li class="mb-2">• <strong>Fair Housing:</strong> All users represent and warrant compliance with federal, state, and local Fair Housing laws prohibiting discrimination based on race, color, religion, sex, disability, familial status, or national origin.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 13. Property Media Rights -->
+          <section id="section-photos" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">13. PHOTOGRAPHS & PROPERTY MEDIA</h2>
+            <p>
+              All photographs, floor plans, and video tours uploaded to the platform must accurately depict the advertised real estate. You represent that you possess all copyright rights to uploaded images and that you have obtained consent from any individuals identifiable in such media.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 14. Shared Information -->
+          <section id="section-shared-info" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">14. INFORMATION SHARED THROUGH SERVICES</h2>
+            <p>
+              When you submit rental applications, messages, or maintenance requests, your contact information and rental specifications are shared with the counterpart party to facilitate tenancy. For complete details on data handling, please refer to our <a routerLink="/privacy-policy" class="text-primary fw-semibold">Privacy Policy</a>.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 15. Third-Party Partners -->
+          <section id="section-partners" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">15. THIRD-PARTY SERVICES & INTEGRATIONS</h2>
+            <p>
+              The Services may contain links or integrations with third-party providers (e.g., payment gateways, cloud hosting partners, mapping APIs). Krenter does not control, endorse, or assume responsibility for the performance, terms, or privacy practices of independent third-party services.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 16. SMS & Text Messaging -->
+          <section id="section-sms" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">16. SMS & TEXT MESSAGING CONSENT (TCPA)</h2>
+            <p>
+              By providing your mobile telephone number, you consent to receive transactional and operational SMS text messages from Krenter (such as payment confirmations, login verification codes, and maintenance updates).
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• Standard carrier message and data rates apply.</li>
+              <li class="mb-2">• You may opt out of SMS communications at any time by replying "STOP" or by contacting <a href="mailto:support@krenter.app" class="text-primary">support@krenter.app</a>.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 17. Intellectual Property -->
+          <section id="section-ip" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">17. KRENTER INTELLECTUAL PROPERTY & TRADEMARKS</h2>
+            <p>
+              All trademarks, logos, service marks, graphics, user interface designs, and code comprising the Services are the exclusive property of Krenter, Inc. or its licensors. You may not reproduce, adapt, or display any Krenter trademarks without our prior written permission.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 18. Disclaimers & Warranties -->
+          <section id="section-warranties" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">18. WARRANTIES & DISCLAIMERS</h2>
+            <div class="alert alert-light border rounded-3 small">
+              THE SERVICES AND ALL CONTENT THEREIN ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, KRENTER DISCLAIMS ALL WARRANTIES, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 19. Limitation of Liability -->
+          <section id="section-liability" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">19. LIMITATION OF LIABILITY</h2>
+            <div class="alert alert-light border rounded-3 small">
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL KRENTER, ITS OFFICERS, DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES (INCLUDING LOSS OF PROFITS, DATA, OR USE) ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SERVICES. IN NO EVENT SHALL KRENTER'S TOTAL AGGREGATE LIABILITY EXCEED THE GREATER OF: (A) THE FEES PAID BY YOU TO KRENTER IN THE SIX (6) MONTHS PRIOR TO THE CLAIM, OR (B) $100.00 USD.
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 20. Indemnification -->
+          <section id="section-indemnity" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">20. INDEMNIFICATION</h2>
+            <p>
+              You agree to defend, indemnify, and hold harmless Krenter, Inc., its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys' fees) arising out of: (a) your use of or access to the Services; (b) your violation of any term of this Agreement; (c) your User Content; or (d) any dispute between you and any other user (including landlord-tenant disputes).
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 21. Term & Termination -->
+          <section id="section-term" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">21. TERM & TERMINATION</h2>
+            <p>
+              This Agreement remains in effect until terminated by either party. You may terminate your account at any time via the in-app deletion settings or by emailing <a href="mailto:support@krenter.app" class="text-primary fw-semibold">support@krenter.app</a> (see Section 13 of our <a routerLink="/privacy-policy" class="text-primary fw-semibold">Privacy Policy</a>). Krenter reserves the right to suspend or terminate your account or access to the Services immediately, with or without notice, in the event of any breach of this Agreement or suspected unlawful activity.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 22. Confidentiality -->
+          <section id="section-confidentiality" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">22. CONFIDENTIALITY</h2>
+            <p>
+              Non-public technical and financial information disclosed by Krenter regarding the Services constitutes proprietary confidential information. You agree to protect such information with reasonable care and not disclose it to third parties without prior written consent.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 23. Dispute Resolution & Arbitration -->
+          <section id="section-disputes" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">23. DISPUTE RESOLUTION & BINDING ARBITRATION</h2>
+            <p>
+              PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Binding Arbitration:</strong> Any dispute, controversy, or claim arising out of or relating to this Agreement or the Services shall be settled by binding arbitration administered by the American Arbitration Association (AAA) under its Commercial Arbitration Rules.</li>
+              <li class="mb-2">• <strong>Class Action Waiver:</strong> YOU AND KRENTER AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.</li>
+              <li class="mb-2">• <strong>Governing Law:</strong> This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without giving effect to conflict of laws principles.</li>
+              <li class="mb-2">• <strong>Time Limitation:</strong> Any claim or cause of action arising out of or related to use of the Services must be filed within one (1) year after such claim arose or be forever barred.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 24. General Legal Provisions -->
+          <section id="section-general" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">24. GENERAL LEGAL PROVISIONS</h2>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Severability:</strong> If any provision of this Agreement is held to be invalid or unenforceable, that provision will be enforced to the maximum extent permissible, and the remaining provisions will remain in full force and effect.</li>
+              <li class="mb-2">• <strong>Assignment:</strong> You may not assign or transfer this Agreement without our prior written consent. Krenter may assign its rights and obligations without restriction.</li>
+              <li class="mb-2">• <strong>Force Majeure:</strong> Krenter will not be liable for any failure or delay in performance resulting from causes beyond its reasonable control, including acts of God, strikes, power outages, or telecommunications failures.</li>
+              <li class="mb-2">• <strong>Entire Agreement:</strong> This Agreement constitutes the complete and exclusive understanding between you and Krenter regarding the Services.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 25. PCI-DSS Compliance -->
+          <section id="section-pci" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">25. PCI-DSS COMPLIANCE ACKNOWLEDGEMENT</h2>
+            <p>
+              In accordance with Payment Card Industry Data Security Standard (PCI DSS) Requirement 12.9.1, Krenter acknowledges its responsibility for the security of cardholder data that it transmits or processes on behalf of users in connection with the Services, and maintains administrative and technical safeguards consistent with PCI DSS standards.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 26. DMCA Policy -->
+          <section id="section-dmca" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">26. COPYRIGHT POLICY & DMCA NOTICE</h2>
+            <p>
+              Krenter respects the intellectual property rights of others and complies with the Digital Millennium Copyright Act (DMCA). If you believe in good faith that content hosted on Krenter infringes your copyright, please send a written notification to our designated DMCA Agent containing:
+            </p>
+            <ol class="small text-secondary ps-3 mb-3">
+              <li class="mb-1">A physical or electronic signature of the copyright owner or authorized representative;</li>
+              <li class="mb-1">Identification of the copyrighted work claimed to have been infringed;</li>
+              <li class="mb-1">Identification of the material claimed to be infringing with sufficient detail to enable us to locate it;</li>
+              <li class="mb-1">Your contact details (name, address, telephone number, email);</li>
+              <li class="mb-1">A statement that you have a good-faith belief that use of the material is not authorized; and</li>
+              <li class="mb-1">A statement, made under penalty of perjury, that the information in the notification is accurate.</li>
+            </ol>
+            <p class="small text-muted">
+              Submit DMCA notices to: <a href="mailto:support@krenter.app?subject=DMCA%20Notice" class="text-primary fw-semibold">support@krenter.app</a> (Subject: "DMCA Notice").
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 27. Contact Information -->
+          <section id="section-contact" class="mb-4">
+            <div class="card border-0 bg-light rounded-3 p-4">
+              <h2 class="h4 fw-bold text-primary mb-2">27. CONTACT INFORMATION</h2>
+              <p class="text-secondary mb-3">
+                For questions, legal notices, or customer support regarding these Terms of Use, please contact us:
+              </p>
+              <div class="d-flex flex-column gap-2 small">
+                <div><strong>Company:</strong> Krenter, Inc.</div>
+                <div><strong>Domain:</strong> <a routerLink="/" class="text-primary fw-semibold">krenter.org</a></div>
+                <div><strong>Support Email:</strong> <a href="mailto:support@krenter.app" class="text-primary fw-semibold">support@krenter.app</a></div>
+                <div><strong>Help Center:</strong> <a routerLink="/support" class="text-primary fw-semibold">krenter.org/support</a></div>
+                <div><strong>Business Hours:</strong> Monday – Friday, 9:00 AM – 6:00 PM EST</div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

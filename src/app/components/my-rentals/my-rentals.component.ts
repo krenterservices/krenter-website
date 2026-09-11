@@ -3,7 +3,6 @@ import { PropertyService, Rental, Property } from '../../services/property.servi
 import { AuthService, KrenterUser } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Subscription } from 'rxjs';
 
 interface RentalWithProperty extends Rental {

@@ -4,7 +4,6 @@ import { UserService } from '../../services/user.service';
 import { AuthService, KrenterUser } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Subscription } from 'rxjs';
 
 interface PropertyWithRenters extends Property {
@@ -14,7 +13,7 @@ interface PropertyWithRenters extends Property {
 @Component({
   selector: 'app-my-properties',
   standalone: true,
-  imports: [CommonModule, RouterLink, NavbarComponent],
+  imports: [CommonModule, RouterLink],
   templateUrl: './my-properties.component.html',
   styleUrls: ['./my-properties.component.scss']
 })

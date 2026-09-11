@@ -1,0 +1,571 @@
+<div class="privacy-policy-page bg-light py-5">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
+      </ol>
+    </nav>
+
+    <!-- Header Banner -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 overflow-hidden hero-card">
+      <div class="card-body p-4 p-md-5">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <img src="/krenter-logo.png" alt="Krenter Logo" class="brand-logo img-fluid" style="max-height: 48px;" />
+              <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+                Legal Documentation
+              </span>
+            </div>
+            <h1 class="display-5 fw-bold text-dark mb-3">Krenter Privacy Policy</h1>
+            <p class="lead text-muted mb-3">
+              This Privacy Policy describes how Krenter collects, uses, protects, and discloses personal information when you use our web platform and mobile applications.
+            </p>
+            <div class="d-flex flex-wrap gap-2 align-items-center text-secondary small">
+              <span class="fw-semibold text-dark"><i class="bi bi-calendar3 me-1"></i>Last Modified:</span> {{ lastModifiedDate }}
+              <span class="mx-2">•</span>
+              <span class="badge bg-success-subtle text-success border border-success-subtle">App Store Compliant</span>
+              <span class="badge bg-info-subtle text-info border border-info-subtle">Google Play Ready</span>
+              <span class="badge bg-warning-subtle text-warning border border-warning-subtle">GDPR & CCPA Aligned</span>
+            </div>
+          </div>
+          <div class="col-lg-4 mt-4 mt-lg-0 text-lg-end">
+            <div class="p-3 bg-white rounded-3 shadow-sm border d-inline-block text-start w-100 max-w-sm">
+              <h6 class="fw-bold mb-2 text-dark">Get Krenter on Mobile</h6>
+              <p class="small text-muted mb-3">Manage rentals, payments, and maintenance directly on your smartphone.</p>
+              <div class="d-flex flex-column flex-sm-row flex-lg-column gap-2">
+                <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+                  <img src="/AppIcons/appstore.png" alt="App Store" style="height: 20px;" />
+                  <span>Download on App Store</span>
+                </a>
+                <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-dark btn-sm d-flex align-items-center justify-content-center gap-2 py-2">
+                  <img src="/AppIcons/playstore.png" alt="Google Play" style="height: 20px;" />
+                  <span>Get it on Google Play</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Highlights Callout -->
+    <div class="card border-0 shadow-sm rounded-4 mb-4 highlight-card">
+      <div class="card-body p-4">
+        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-shield-check text-primary me-2"></i>Privacy Highlights at a Glance</h5>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">What We Collect</h6>
+              <p class="small text-muted mb-0">Contact details, property data, rental history, payment transaction records, and device diagnostics.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Why We Use It</h6>
+              <p class="small text-muted mb-0">To connect landlords and tenants, process rent payments, manage listings, and enhance platform security.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Account & Data Deletion</h6>
+              <p class="small text-muted mb-0">Easily request permanent deletion of your account and personal data in-app or by emailing support@krenter.app.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="p-3 bg-white rounded-3 border h-100">
+              <h6 class="fw-bold text-primary mb-1">Your Rights</h6>
+              <p class="small text-muted mb-0">Full GDPR and CCPA rights including access, correction, portability, and non-discrimination.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="row g-4">
+      <!-- Table of Contents Sidebar -->
+      <aside class="col-lg-3 d-none d-lg-block">
+        <div class="sticky-top toc-container p-3 bg-white rounded-4 shadow-sm border" style="top: 2rem;">
+          <h6 class="fw-bold text-uppercase text-secondary small mb-3 tracking-wide">Contents</h6>
+          <nav class="nav flex-column toc-nav small">
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-overview" (click)="scrollToSection('section-overview', $event)">1. Overview & Scope</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-revisions" (click)="scrollToSection('section-revisions', $event)">2. Revisions & Updates</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-collection" (click)="scrollToSection('section-collection', $event)">3. Collection of Personal Data</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-mobile" (click)="scrollToSection('section-mobile', $event)">4. Mobile App Permissions</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-purposes" (click)="scrollToSection('section-purposes', $event)">5. Processing Purposes</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-disclosure" (click)="scrollToSection('section-disclosure', $event)">6. Disclosure of Personal Data</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-anonymous" (click)="scrollToSection('section-anonymous', $event)">7. Anonymous Information</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-public" (click)="scrollToSection('section-public', $event)">8. Public Forums</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-third-parties" (click)="scrollToSection('section-third-parties', $event)">9. Third-Party Services</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-choices" (click)="scrollToSection('section-choices', $event)">10. Choices & Opt-Outs</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-security" (click)="scrollToSection('section-security', $event)">11. Security & Storage</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-international" (click)="scrollToSection('section-international', $event)">12. International Transfers</a>
+            <a class="nav-link px-2 py-1 text-danger fw-semibold" href="#section-deletion" (click)="scrollToSection('section-deletion', $event)">13. Account & Data Deletion</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-children" (click)="scrollToSection('section-children', $event)">14. Children's Privacy</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-gdpr" (click)="scrollToSection('section-gdpr', $event)">15. EEA & UK Rights (GDPR)</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-ccpa" (click)="scrollToSection('section-ccpa', $event)">16. California Rights (CCPA)</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-verification" (click)="scrollToSection('section-verification', $event)">17. Consumer Verification</a>
+            <a class="nav-link px-2 py-1 text-secondary" href="#section-contact" (click)="scrollToSection('section-contact', $event)">18. Contact Us</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main Policy Articles -->
+      <main class="col-lg-9">
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white text-dark policy-content">
+          
+          <!-- 1. Overview & Scope -->
+          <section id="section-overview" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">1. OVERVIEW & SCOPE</h2>
+            <p>
+              Krenter, Inc. (hereinafter, "<strong>Krenter</strong>," "<strong>we</strong>," "<strong>our</strong>," or "<strong>us</strong>") provides rental property management software and services (the "<strong>Services</strong>") to property owners, landlords, property managers, tenants, and prospective renters (collectively, "<strong>you</strong>" or "<strong>your</strong>") through our website located at <a routerLink="/" class="text-primary fw-semibold">krenter.app</a> (the "<strong>Site</strong>") and our mobile applications available on the Apple App Store and Google Play Store (the "<strong>App</strong>").
+            </p>
+            <p>
+              This privacy policy ("<strong>Privacy Policy</strong>") explains the types of information relating to an identified or identifiable natural person, or as otherwise defined under applicable privacy legislation ("<strong>Personal Data</strong>"), that we collect, use, process, and disclose when you access or interact with the Services, Site, or App.
+            </p>
+            <p>
+              Unless explicitly stated otherwise, any current, updated, and new features, tools, or mobile applications released by Krenter shall be subject to this Privacy Policy as well as our Terms of Service.
+            </p>
+            <div class="alert alert-warning border-0 rounded-3 small">
+              <strong>IMPORTANT:</strong> By downloading, registering for, accessing, or using the Krenter Services, Site, or Mobile App, you acknowledge and agree to the practices described in this Privacy Policy. If you do not agree with our policies and practices, please do not use the Services or provide us with any Personal Data.
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 2. Revisions and Modifications -->
+          <section id="section-revisions" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">2. REVISIONS AND MODIFICATIONS</h2>
+            <p>
+              As our business, legal requirements, and product features evolve, we reserve the right to modify or update this Privacy Policy at any time. When material changes are made, we will revise the "Last Modified Date" at the top of this webpage and, where required by law, provide notice to you via email or through an in-app alert within the Krenter mobile application.
+            </p>
+            <p>
+              Your continued use of the Services following the posting of an updated Privacy Policy constitutes your agreement to and acceptance of such changes. We encourage you to periodically review this page to stay informed about our privacy practices.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 3. Collection of Personal Data -->
+          <section id="section-collection" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">3. COLLECTION OF PERSONAL DATA</h2>
+            <p>We collect Personal Data about you across several categories depending on how you interact with Krenter:</p>
+            
+            <h5 class="fw-bold text-dark mt-4">A. Personal Data Collected Directly from You</h5>
+            <p>When you create an account, list a property, apply for a rental, sign a lease, or communicate with us, we collect:</p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Identifiers:</strong> Legal name, email address, phone number, postal address, profile photograph, and account credentials.</li>
+              <li class="mb-2">• <strong>Rental & Property Data:</strong> Property addresses, lease terms, unit specifications, rental rates, maintenance tickets, and utility information.</li>
+              <li class="mb-2">• <strong>Financial & Transaction Records:</strong> Bank account numbers, routing details, credit/debit card tokens (processed securely via PCI-DSS compliant third-party processors), payment transaction history, and security deposit records.</li>
+              <li class="mb-2">• <strong>Screening & Application Information:</strong> Employment history, stated income, references, identification documents (such as driver's license or government ID), and tenant screening reports submitted via authorized screening partners.</li>
+              <li class="mb-2">• <strong>Communications:</strong> Messages, support inquiries, feedback, and attachments transmitted via Krenter in-app support or email.</li>
+            </ul>
+
+            <h5 class="fw-bold text-dark mt-4">B. Personal Data Automatically Collected</h5>
+            <p>When you navigate our Site or use our Mobile App, we automatically collect technical diagnostics:</p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Device & Network Identifiers:</strong> IP address, device type, mobile operating system (iOS or Android), unique device identifiers (IDFV, Android ID), browser type, and app version.</li>
+              <li class="mb-2">• <strong>Usage & Telemetry:</strong> Pages or screens viewed, features utilized, button clicks, time spent per session, crash logs, and performance metrics.</li>
+              <li class="mb-2">• <strong>Cookies & Tracking Technologies:</strong> Small data files stored on your browser to keep you signed in, remember your preferences, and track aggregate website usage.</li>
+            </ul>
+
+            <h5 class="fw-bold text-dark mt-4">C. Personal Data from Third Parties</h5>
+            <p>
+              We may obtain information from third parties, including authentication providers (e.g., Google or Apple sign-in), screening agencies, credit bureaus (with tenant authorization), and payment gateways.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 4. Mobile App Permissions & Data Safety -->
+          <section id="section-mobile" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">4. MOBILE APPLICATION PERMISSIONS & DATA SAFETY</h2>
+            <div class="alert alert-info border-0 rounded-3 small mb-3">
+              <strong>Apple App Store & Google Play Data Safety Notice:</strong> The Krenter mobile app requests only the minimum permissions necessary to deliver core property management functionality. You can grant or revoke these permissions at any time via your device operating system settings.
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover align-middle small">
+                <thead class="table-light">
+                  <tr>
+                    <th>Permission / Data</th>
+                    <th>Platform</th>
+                    <th>Purpose & Usage</th>
+                    <th>Optional / Required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-semibold">Camera</td>
+                    <td>iOS & Android</td>
+                    <td>Take photos of property units, damage documentation, maintenance issues, or identification cards for tenant verification.</td>
+                    <td>Optional (requested on-demand)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Photo Library / Storage</td>
+                    <td>iOS & Android</td>
+                    <td>Upload existing photos of rental properties, receipts, lease agreements, or profile avatars from your device library.</td>
+                    <td>Optional (requested on-demand)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Push Notifications</td>
+                    <td>iOS & Android</td>
+                    <td>Send time-sensitive rental alerts, rent due reminders, maintenance ticket updates, and application status notices.</td>
+                    <td>Optional (can disable in device settings)</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Approximate Location</td>
+                    <td>iOS & Android</td>
+                    <td>Enable geo-targeted rental discovery and search for properties near your current vicinity. Krenter does not track continuous background location.</td>
+                    <td>Optional</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Biometrics (FaceID / TouchID)</td>
+                    <td>iOS & Android</td>
+                    <td>Local biometric authentication for secure and frictionless sign-in. Biometric data is processed exclusively on-device by your OS and is never transmitted to Krenter servers.</td>
+                    <td>Optional</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 5. Processing Purposes -->
+          <section id="section-purposes" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">5. PROCESSING PURPOSES & LEGAL BASES</h2>
+            <p>
+              In accordance with applicable privacy laws (including GDPR and CCPA), we process your Personal Data for specific lawful purposes:
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Service Delivery & Contract Fulfillment</h6>
+                  <p class="small text-muted mb-0">
+                    To create and maintain accounts, facilitate lease agreements, process online rent transactions, display property listings, and dispatch maintenance requests.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Customer Support & Communication</h6>
+                  <p class="small text-muted mb-0">
+                    To respond to user support inquiries, troubleshoot technical bugs, send account notices, and alert you of platform updates.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Security, Fraud & Risk Prevention</h6>
+                  <p class="small text-muted mb-0">
+                    To authenticate users, detect and mitigate fraudulent listings or unauthorized access, verify identities, and protect platform integrity.
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Legal Compliance & Dispute Resolution</h6>
+                  <p class="small text-muted mb-0">
+                    To satisfy tax, real estate, accounting, and anti-money laundering requirements, and to enforce our Terms of Service.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 6. Disclosure of Personal Data -->
+          <section id="section-disclosure" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">6. DISCLOSURE OF PERSONAL DATA</h2>
+            <p>
+              We do not sell your Personal Data for monetary consideration. We share information only in specific circumstances necessary to operate our Services:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">
+                • <strong>Between Landlords & Tenants:</strong> To fulfill the core rental relationship, rental applications, lease details, contact names, and maintenance requests are shared between the respective landlord/owner and renter.
+              </li>
+              <li class="mb-2">
+                • <strong>Service Providers & Infrastructure:</strong> Trusted vendors who provide cloud hosting (Google Cloud / Firebase), database management, customer service software, SMS/email delivery, and payment processing. All providers are contractually obligated to safeguard your data.
+              </li>
+              <li class="mb-2">
+                • <strong>Tenant Screening & Credit Agencies:</strong> When a tenant authorizes an application or background screening, data is transmitted to specialized screening partners to generate reports.
+              </li>
+              <li class="mb-2">
+                • <strong>Legal Compliance & Protection:</strong> When required by subpoenas, court orders, or applicable law, or to protect the safety and property of Krenter, our users, or the public.
+              </li>
+              <li class="mb-2">
+                • <strong>Business Transfers:</strong> In the event of a merger, acquisition, restructuring, or sale of company assets, Personal Data may be transferred to the acquiring entity.
+              </li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 7. Anonymous & Aggregate Information -->
+          <section id="section-anonymous" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">7. ANONYMOUS & AGGREGATE INFORMATION</h2>
+            <p>
+              We may de-identify and aggregate data collected from your use of the Services so that it cannot reasonably be linked back to you ("<strong>Aggregate Data</strong>"). We may use Aggregate Data to study market rental trends, publish industry reports, optimize application performance, and develop new features.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 8. Public Forums -->
+          <section id="section-public" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">8. PUBLIC FORUMS & USER COMMUNICATIONS</h2>
+            <p>
+              If you post comments, reviews, community questions, or property listings on public-facing areas of the Site or App, that information may be viewable by other users and the general public. Please exercise caution when choosing what information to disclose publicly.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 9. Third-Party Services -->
+          <section id="section-third-parties" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">9. THIRD-PARTY SERVICES & INTEGRATIONS</h2>
+            <p>
+              Our Site and Mobile App utilize industry-standard SDKs and APIs to provide secure functionality:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Firebase (Google LLC):</strong> Used for secure user authentication, Firestore real-time cloud databases, and cloud storage.</li>
+              <li class="mb-2">• <strong>Apple App Store & Google Play:</strong> Distribution, in-app updates, and platform telemetry.</li>
+              <li class="mb-2">• <strong>Payment Gateways:</strong> Encrypted financial transactions and automated ACH/card payouts.</li>
+            </ul>
+            <p class="small text-muted">
+              We are not responsible for the privacy practices of third-party websites or services linked to our platform. We encourage you to review their independent privacy policies.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 10. Choices & Opt-Outs -->
+          <section id="section-choices" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">10. CHOICES ABOUT YOUR PERSONAL DATA</h2>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Account Profile:</strong> You can review, update, or edit your personal profile information directly within the Krenter web app or mobile app at any time.</li>
+              <li class="mb-2">• <strong>Marketing Communications:</strong> You may opt out of receiving promotional emails by clicking the "unsubscribe" link included at the bottom of our emails. Even if you opt out of promotional messages, you will still receive transactional emails related to your account, leases, and payments.</li>
+              <li class="mb-2">• <strong>Push Notifications:</strong> You can opt in or out of push notifications on your iOS or Android device in your system settings.</li>
+              <li class="mb-2">• <strong>Do Not Track (DNT):</strong> Currently, our systems do not alter practices in response to automated "Do Not Track" browser signals due to the absence of a unified industry standard.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 11. Security & Storage -->
+          <section id="section-security" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">11. CONFIDENTIALITY, SECURITY & STORAGE</h2>
+            <p>
+              Krenter implements robust physical, technical, and administrative safeguards designed to protect your Personal Data against unauthorized access, loss, misuse, or alteration:
+            </p>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Encryption in Transit:</strong> All data transmitted between your device and Krenter is encrypted using Transport Layer Security (TLS/HTTPS).</li>
+              <li class="mb-2">• <strong>Encryption at Rest:</strong> Database assets and file uploads are stored in encrypted cloud repositories.</li>
+              <li class="mb-2">• <strong>Role-Based Access:</strong> Access to sensitive personal records is strictly limited to authorized personnel with a legitimate business need.</li>
+            </ul>
+            <p class="small text-muted">
+              While we employ state-of-the-art security measures, no electronic transmission over the internet or method of electronic storage can be guaranteed to be 100% secure.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 12. International Transfers -->
+          <section id="section-international" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">12. INTERNATIONAL TRANSFERS</h2>
+            <p>
+              Krenter is operated in the United States and cloud servers are located in secure data centers within the United States. If you access the Services from outside the United States, your information will be transferred, processed, and stored in the United States under applicable data protection frameworks.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 13. Account & Data Deletion (Apple App Store Guideline 5.1.1(v) & Google Play Compliant) -->
+          <section id="section-deletion" class="mb-5">
+            <div class="card border-danger border-2 rounded-4 shadow-sm bg-danger-subtle p-4">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge bg-danger text-white px-3 py-2 rounded-pill">App Store & Play Store Compliance</span>
+                <h2 class="h4 fw-bold text-danger mb-0">13. ACCOUNT & DATA DELETION PROCEDURES</h2>
+              </div>
+              <p class="text-dark">
+                In compliance with <strong>Apple App Store Guideline 5.1.1(v)</strong> and <strong>Google Play Data Safety Policies</strong>, Krenter provides all registered users with direct, transparent mechanisms to request complete account deletion and erasure of their personal data.
+              </p>
+
+              <div class="bg-white p-3 rounded-3 border border-danger-subtle mb-3">
+                <h6 class="fw-bold text-dark mb-2">Option 1: In-App Account Deletion (iOS & Android)</h6>
+                <ol class="small text-secondary mb-0 ps-3">
+                  <li class="mb-1">Open the <strong>Krenter</strong> app on your iOS or Android device.</li>
+                  <li class="mb-1">Navigate to the <strong>Profile</strong> tab in the bottom navigation.</li>
+                  <li class="mb-1">Select <strong>Account Settings</strong>.</li>
+                  <li class="mb-1">Scroll to the bottom and tap <span class="text-danger fw-semibold">Delete Account</span>.</li>
+                  <li class="mb-1">Confirm your password and confirm the deletion request.</li>
+                </ol>
+              </div>
+
+              <div class="bg-white p-3 rounded-3 border border-danger-subtle mb-3">
+                <h6 class="fw-bold text-dark mb-2">Option 2: Web & Email Deletion Request</h6>
+                <p class="small text-secondary mb-2">
+                  If you cannot access the mobile application, or wish to submit a manual deletion request, email our Data Privacy Officer directly:
+                </p>
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                  <a href="mailto:support@krenter.app?subject=Krenter%20Account%20and%20Data%20Deletion%20Request" class="btn btn-danger btn-sm">
+                    <i class="bi bi-envelope-fill me-1"></i>Email support@krenter.app
+                  </a>
+                  <span class="small text-muted">Subject: "Krenter Account and Data Deletion Request"</span>
+                </div>
+              </div>
+
+              <h6 class="fw-bold text-dark mb-1">What Happens When You Delete Your Account:</h6>
+              <ul class="small text-secondary ps-3 mb-0">
+                <li class="mb-1">Your user credentials and authentication profile are permanently purged.</li>
+                <li class="mb-1">Personal profile details, avatars, and contact information are immediately unlinked and deleted.</li>
+                <li class="mb-1">Active property listings under your owner account are unpublished.</li>
+                <li class="mb-1">Note: Financial transaction logs and completed lease records may be retained in encrypted archives strictly to the extent required by real estate tax regulations, banking compliance, and statutory retention laws.</li>
+              </ul>
+            </div>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 14. Children's Privacy -->
+          <section id="section-children" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">14. CHILDREN'S PRIVACY</h2>
+            <p>
+              The Services are not directed toward or intended for children under the age of 18. Krenter does not knowingly collect or solicit Personal Data from children. If we learn that we have collected Personal Data from a child under 18 without verified parental consent, we will promptly delete that information. If you believe a minor has registered an account, please contact us immediately at <a href="mailto:support@krenter.app" class="text-primary fw-semibold">support@krenter.app</a>.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 15. EEA & UK Privacy Rights (GDPR) -->
+          <section id="section-gdpr" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">15. EEA AND UK PRIVACY RIGHTS (GDPR)</h2>
+            <p>
+              If you reside in the European Economic Area (EEA) or the United Kingdom (UK), you possess specific statutory rights under the General Data Protection Regulation (GDPR) and the UK Data Protection Act 2018:
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Right of Access & Rectification</h6>
+                  <p class="small text-muted mb-0">You have the right to request a copy of the Personal Data we hold about you and to have inaccurate data rectified.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Right to Erasure ("Right to Be Forgotten")</h6>
+                  <p class="small text-muted mb-0">You can request that your Personal Data be erased where it is no longer necessary for the purposes collected.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Right to Data Portability</h6>
+                  <p class="small text-muted mb-0">You have the right to receive your data in a structured, commonly used, and machine-readable format.</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 border rounded-3 bg-light h-100">
+                  <h6 class="fw-bold text-dark">Right to Object & Restrict Processing</h6>
+                  <p class="small text-muted mb-0">You may object to or request the restriction of processing of your data under certain circumstances.</p>
+                </div>
+              </div>
+            </div>
+            <p class="small text-muted mt-3">
+              To exercise these rights, please contact our Data Protection Officer at <a href="mailto:support@krenter.app" class="text-primary">support@krenter.app</a> with the subject line "GDPR Rights Request".
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 16. California Privacy Rights (CCPA / CPRA) -->
+          <section id="section-ccpa" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">16. CALIFORNIA PRIVACY RIGHTS (CCPA / CPRA)</h2>
+            <p>
+              Under the California Consumer Privacy Act of 2018 ("<strong>CCPA</strong>"), as amended by the California Privacy Rights Act of 2020 ("<strong>CPRA</strong>"), California residents are entitled to specific disclosures regarding the categories of Personal Data collected and shared over the preceding 12 months:
+            </p>
+
+            <div class="table-responsive mb-4">
+              <table class="table table-bordered table-striped align-middle small">
+                <thead class="table-light">
+                  <tr>
+                    <th>Category of Personal Data</th>
+                    <th>Categories of Third Parties Shared With</th>
+                    <th>Business Purpose for Sharing</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-semibold">Identifiers (Name, email, phone, address, IP)</td>
+                    <td>Cloud infrastructure (Google Cloud/Firebase), payment processors, authorized landlords/tenants.</td>
+                    <td>Provide the Services, authenticate users, process payments, and provide customer support.</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">California Customer Records (Bank details, payment info)</td>
+                    <td>PCI-DSS compliant payment gateways, banking partners.</td>
+                    <td>Facilitate rent payments, security deposits, and disbursements.</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Commercial Information (Rental records, payment history)</td>
+                    <td>Landlords/Tenants, accounting service providers.</td>
+                    <td>Manage rental ledger, track active leases, and tax recordkeeping.</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Internet / Network Activity (Device type, logs)</td>
+                    <td>Analytics providers, cloud security partners.</td>
+                    <td>Monitor service performance, debug issues, and secure infrastructure.</td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Geolocation Data (Approximate location)</td>
+                    <td>Map & search service providers.</td>
+                    <td>Enable property discovery in vicinity.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h5 class="fw-bold text-dark">California Resident Rights</h5>
+            <ul class="list-unstyled ps-3">
+              <li class="mb-2">• <strong>Right to Know & Access:</strong> Request details regarding categories and specific pieces of Personal Data collected over the past 12 months.</li>
+              <li class="mb-2">• <strong>Right to Delete:</strong> Request deletion of Personal Data collected from you.</li>
+              <li class="mb-2">• <strong>Right to Correct:</strong> Request correction of inaccurate Personal Data.</li>
+              <li class="mb-2">• <strong>Right to Opt-Out of Sale or Sharing:</strong> Krenter does not sell Personal Data for monetary consideration.</li>
+              <li class="mb-2">• <strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights.</li>
+            </ul>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 17. Consumer Verification -->
+          <section id="section-verification" class="mb-5">
+            <h2 class="h4 fw-bold text-primary mb-3">17. CONSUMER REQUESTS & VERIFICATION</h2>
+            <p>
+              To protect your privacy and ensure security, we verify your identity before processing access, correction, or deletion requests. When you submit a request, you must provide your account email address and proof of account ownership. We will acknowledge receipt of your request within 10 business days and provide a substantive response within 45 calendar days.
+            </p>
+          </section>
+
+          <hr class="my-4 text-muted opacity-25" />
+
+          <!-- 18. Contact Us -->
+          <section id="section-contact" class="mb-4">
+            <div class="card border-0 bg-light rounded-3 p-4">
+              <h2 class="h4 fw-bold text-primary mb-2">18. CONTACT INFORMATION</h2>
+              <p class="text-secondary mb-3">
+                If you have questions, concerns, or requests regarding this Privacy Policy, our data handling practices, or would like to submit a data request, please contact us:
+              </p>
+              <div class="d-flex flex-column gap-2 small">
+                <div><strong>Company:</strong> Krenter, Inc.</div>
+                <div><strong>Email Support:</strong> <a href="mailto:support@krenter.app" class="text-primary fw-semibold">support@krenter.app</a></div>
+                <div><strong>Support Center:</strong> <a routerLink="/support" class="text-primary fw-semibold">krenter.app/support</a></div>
+                <div><strong>Availability:</strong> Monday – Friday, 9:00 AM – 6:00 PM EST</div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

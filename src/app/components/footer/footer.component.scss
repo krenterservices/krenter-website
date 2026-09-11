@@ -1,0 +1,15 @@
+.krenter-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  .footer-link {
+    transition: color 0.15s ease-in-out;
+
+    &:hover {
+      color: #ef8124 !important;
+    }
+  }
+
+  .text-warning {
+    color: #ef8124 !important;
+  }
+}

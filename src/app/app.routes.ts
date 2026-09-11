@@ -9,6 +9,8 @@ import { MyPropertiesComponent } from './components/my-properties/my-properties.
 import { EditPropertyComponent } from './components/edit-property/edit-property.component';
 import { MyRentalsComponent } from './components/my-rentals/my-rentals.component';
 import { SupportComponent } from './components/support/support.component';
+import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
+import { TermsOfUseComponent } from './components/terms-of-use/terms-of-use.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -22,6 +24,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'support', component: SupportComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'privacypolicy', component: PrivacyPolicyComponent },
+  { path: 'terms', component: TermsOfUseComponent },
+  { path: 'terms-of-use', component: TermsOfUseComponent },
+  { path: 'termsofuse', component: TermsOfUseComponent },
   {
     path: 'dashboard',
     loadComponent: () => import('./components/dashboard/dashboard.component').then(module => module.DashboardComponent),

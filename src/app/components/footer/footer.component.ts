@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-support',
+  selector: 'app-footer',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  templateUrl: './support.component.html',
-  styleUrl: './support.component.scss'
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.scss',
 })
-export class SupportComponent {
-  constructor() {}
+export class FooterComponent {
+  readonly currentYear = new Date().getFullYear();
 }

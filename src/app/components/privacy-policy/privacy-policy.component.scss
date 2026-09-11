@@ -1,0 +1,72 @@
+.privacy-policy-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7f0 100%);
+  border-left: 5px solid #ef8124 !important;
+}
+
+.highlight-card {
+  background-color: #ffffff;
+  border-top: 3px solid #ef8124 !important;
+}
+
+.text-primary {
+  color: #ef8124 !important;
+}
+
+.bg-primary-subtle {
+  background-color: rgba(239, 129, 36, 0.12) !important;
+}
+
+.border-primary-subtle {
+  border-color: rgba(239, 129, 36, 0.3) !important;
+}
+
+.btn-outline-dark {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+.toc-container {
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+
+  .toc-nav {
+    .nav-link {
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+      border-radius: 6px;
+      font-size: 0.85rem;
+
+      &:hover {
+        color: #ef8124 !important;
+        background-color: #fff7f0;
+      }
+    }
+  }
+}
+
+.policy-content {
+  line-height: 1.7;
+
+  h2 {
+    scroll-margin-top: 2rem;
+  }
+
+  p, li {
+    color: #495057;
+  }
+}
+
+.table {
+  th {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+}
