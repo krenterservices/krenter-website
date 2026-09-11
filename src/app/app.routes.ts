@@ -22,6 +22,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'support', component: SupportComponent },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./components/dashboard/dashboard.component').then(module => module.DashboardComponent),
+    canActivate: [AuthGuard]
+  },
   { path: 'add-property', component: AddPropertyComponent, canActivate: [AuthGuard] },
   { path: 'my-properties', component: MyPropertiesComponent, canActivate: [AuthGuard] },
   { path: 'edit-property/:id', component: EditPropertyComponent, canActivate: [AuthGuard] },

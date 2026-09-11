@@ -21,7 +21,9 @@ export interface KrenterUser {
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<KrenterUser | null>(null);
+  private authReadySubject = new BehaviorSubject<boolean>(false);
   public currentUser = this.currentUserSubject.asObservable();
+  public authReady = this.authReadySubject.asObservable();
   public isLoading = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -40,6 +42,7 @@ export class AuthService {
       })
     ).subscribe(userProfile => {
       this.currentUserSubject.next(userProfile);
+      this.authReadySubject.next(true);
     });
   }
 
@@ -108,7 +111,7 @@ export class AuthService {
 
       this.currentUserSubject.next(krenterUser);
       this.isLoading.next(false);
-      this.router.navigate(['/']);
+      await this.router.navigate(['/dashboard']);
       return { success: true };
     } catch (error: any) {
       this.isLoading.next(false);
@@ -136,7 +139,12 @@ export class AuthService {
       if (userProfile) {
         this.currentUserSubject.next(userProfile);
         this.isLoading.next(false);
-        this.router.navigate(['/']);
+        const navigated = await this.router.navigate(['/dashboard']);
+
+        if (!navigated) {
+          return { success: false, error: 'Unable to open your dashboard. Please try again.' };
+        }
+
         return { success: true };
       } else {
         this.isLoading.next(false);

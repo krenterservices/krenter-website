@@ -6,17 +6,22 @@
   </div>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-state">
+  @if (isLoading) {
+  <div class="loading-state">
     <p>Loading your properties...</p>
   </div>
+  }
 
   <!-- Error Message -->
-  <div *ngIf="errorMessage && !isLoading" class="error-message">
+  @if (errorMessage && !isLoading) {
+  <div class="error-message">
     {{ errorMessage }}
   </div>
+  }
 
   <!-- Properties List -->
-  <div *ngIf="!isLoading && myProperties.length > 0" class="property-list">
+  @if (!isLoading && myProperties.length > 0) {
+  <div class="property-list">
     <div *ngFor="let property of myProperties" class="property-card">
       <div class="property-header">
         <div class="property-title">
@@ -47,9 +52,11 @@
       </div>
 
       <!-- Renters Section (Expandable) -->
-      <div *ngIf="expandedPropertyId === property.id" class="renters-section">
+      @if (expandedPropertyId === property.id) {
+      <div class="renters-section">
         <h4>Current Renters</h4>
-        <div *ngIf="property.renters && property.renters.length > 0" class="renters-list">
+        @if (property.renters && property.renters.length > 0) {
+        <div class="renters-list">
           <div *ngFor="let rental of property.renters" class="renter-card">
             <p><strong>Renter ID:</strong> {{ rental.renterId }}</p>
             <p><strong>Rental Price:</strong> ${{ rental.rentalPrice }}/month</p>
@@ -57,10 +64,14 @@
             <p><strong>Status:</strong> {{ rental.status }}</p>
           </div>
         </div>
-        <div *ngIf="!property.renters || property.renters.length === 0" class="no-renters">
+        }
+        @if (!property.renters || property.renters.length === 0) {
+        <div class="no-renters">
           <p>No active renters for this property</p>
         </div>
+        }
       </div>
+      }
 
       <!-- Action Buttons -->
       <div class="property-actions">
@@ -69,10 +80,13 @@
       </div>
     </div>
   </div>
+  }
 
   <!-- No Properties State -->
-  <div *ngIf="!isLoading && myProperties.length === 0 && !errorMessage" class="empty-state">
+  @if (!isLoading && myProperties.length === 0 && !errorMessage) {
+  <div class="empty-state">
     <p>You haven't added any properties yet.</p>
     <p>Start by adding your first property to get started!</p>
   </div>
+  }
 </div>
