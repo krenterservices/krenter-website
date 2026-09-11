@@ -1,0 +1,91 @@
+<footer class="krenter-footer bg-dark text-light pt-5 pb-4 mt-auto">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <!-- Brand & About -->
+      <div class="col-lg-4 col-md-6">
+        <div class="footer-brand mb-3">
+          <a routerLink="/" class="d-inline-block">
+            <img src="/krenter-logo.png" alt="Krenter Logo" class="footer-logo img-fluid" style="max-height: 42px; filter: brightness(0) invert(1);" />
+          </a>
+        </div>
+        <p class="text-secondary small mb-3">
+          Krenter simplifies rental property management for independent landlords and tenants. Manage properties, collect rent, and coordinate maintenance effortlessly.
+        </p>
+        <div class="d-flex gap-2">
+          <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-2 py-1 px-2">
+            <img src="/AppIcons/appstore.png" alt="App Store" style="height: 18px;" />
+            <span class="small">App Store</span>
+          </a>
+          <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light btn-sm d-inline-flex align-items-center gap-2 py-1 px-2">
+            <img src="/AppIcons/playstore.png" alt="Google Play" style="height: 18px;" />
+            <span class="small">Google Play</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-lg-2 col-md-6 col-6">
+        <h6 class="text-uppercase fw-bold text-light mb-3 tracking-wide small">Product</h6>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2"><a routerLink="/" class="text-secondary text-decoration-none footer-link">Home</a></li>
+          <li class="mb-2"><a routerLink="/properties" class="text-secondary text-decoration-none footer-link">Browse Properties</a></li>
+          <li class="mb-2"><a routerLink="/support" class="text-secondary text-decoration-none footer-link">Support Center</a></li>
+          <li class="mb-2"><a routerLink="/login" class="text-secondary text-decoration-none footer-link">Sign In</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal & Policies -->
+      <div class="col-lg-3 col-md-6 col-6">
+        <h6 class="text-uppercase fw-bold text-light mb-3 tracking-wide small">Legal & Privacy</h6>
+        <ul class="list-unstyled small mb-0">
+          <li class="mb-2">
+            <a routerLink="/privacy-policy" class="text-secondary text-decoration-none footer-link">
+              Privacy Policy
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/privacy-policy" fragment="section-deletion" class="text-secondary text-decoration-none footer-link">
+              Account & Data Deletion
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/privacy-policy" fragment="section-ccpa" class="text-secondary text-decoration-none footer-link">
+              Do Not Sell My Info (CCPA)
+            </a>
+          </li>
+          <li class="mb-2">
+            <a routerLink="/terms" class="text-secondary text-decoration-none footer-link">
+              Terms of Use
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col-lg-3 col-md-6">
+        <h6 class="text-uppercase fw-bold text-light mb-3 tracking-wide small">Contact Us</h6>
+        <p class="text-secondary small mb-2">Have questions about your rental or account?</p>
+        <p class="small mb-1">
+          <a href="mailto:support@krenter.app" class="text-warning text-decoration-none fw-semibold">
+            support@krenter.app
+          </a>
+        </p>
+        <p class="text-secondary small mb-0">Available Monday – Friday, 9am – 6pm EST</p>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-top border-secondary border-opacity-25 pt-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <div class="text-secondary small text-center text-md-start">
+        © {{ currentYear }} Krenter, Inc. All rights reserved. Built for iOS, Android, and Web.
+      </div>
+      <div class="d-flex gap-3 small">
+        <a routerLink="/privacy-policy" class="text-secondary text-decoration-none footer-link">Privacy</a>
+        <span class="text-secondary">•</span>
+        <a routerLink="/terms" class="text-secondary text-decoration-none footer-link">Terms</a>
+        <span class="text-secondary">•</span>
+        <a routerLink="/support" class="text-secondary text-decoration-none footer-link">Support</a>
+      </div>
+    </div>
+  </div>
+</footer>

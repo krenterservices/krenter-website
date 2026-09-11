@@ -1,26 +1,36 @@
 <div class="login-container">
   <h2>Login to Krenter</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="loginError" class="error-message">
+    @if (loginError) {
+    <div class="error-message">
       {{ loginError }}
     </div>
+    }
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email" [disabled]="isLoading">
-      <div *ngIf="emailError" class="error">
+      @if (emailError) {
+      <div class="error">
         {{ emailError }}
       </div>
+      }
     </div>
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" formControlName="password" [disabled]="isLoading">
-      <div *ngIf="passwordError" class="error">
+      @if (passwordError) {
+      <div class="error">
         {{ passwordError }}
       </div>
+      }
     </div>
     <button type="submit" [disabled]="loginForm.invalid || isLoading">
-      <span *ngIf="!isLoading">Login</span>
-      <span *ngIf="isLoading">Logging in...</span>
+      @if (!isLoading) {
+      <span>Login</span>
+      }
+      @if (isLoading) {
+      <span>Logging in...</span>
+      }
     </button>
   </form>
   <p class="register-link">

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
+import { SeoService } from '../../services/seo.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -11,6 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./properties.component.scss']
 })
 export class PropertiesComponent implements OnInit {
+  private readonly seoService = inject(SeoService);
   allProperties: any[] = [];
   filteredProperties: any[] = [];
   paginatedProperties: any[] = [];
@@ -31,6 +33,18 @@ export class PropertiesComponent implements OnInit {
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit(): void {
+    this.seoService.setSeoData({
+      title: 'Browse Rental Properties & Apartments | Krenter',
+      description:
+        'Discover available apartments, houses, flats, and rental properties in your local area. Filter by location, price, and property type on Krenter.',
+      keywords:
+        'apartments for rent, houses for rent, find rentals, rental listings, properties for rent, local rental search, Krenter',
+      canonicalUrl: 'https://krenter.org/properties',
+      ogTitle: 'Browse Rental Properties & Apartments | Krenter',
+      ogDescription:
+        'Find verified rental listings in your area with transparent pricing and direct owner communication.'
+    });
+
     this.propertyService.getProperties().then(properties => {
       this.allProperties = properties;
     });

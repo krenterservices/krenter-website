@@ -1,32 +1,40 @@
 <div class="register-container">
   <h2>Create Your Krenter Account</h2>
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="registerError" class="error-message">
+    @if (registerError) {
+    <div class="error-message">
       {{ registerError }}
     </div>
+    }
 
     <div class="form-group">
       <label for="name">Full Name</label>
       <input type="text" id="name" formControlName="name" [disabled]="isLoading">
-      <div *ngIf="nameError" class="error">
+      @if (nameError) {
+      <div class="error">
         {{ nameError }}
       </div>
+      }
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email" [disabled]="isLoading">
-      <div *ngIf="emailError" class="error">
+      @if (emailError) {
+      <div class="error">
         {{ emailError }}
       </div>
+      }
     </div>
 
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" formControlName="password" [disabled]="isLoading">
-      <div *ngIf="passwordError" class="error">
+      @if (passwordError) {
+      <div class="error">
         {{ passwordError }}
       </div>
+      }
       <small>Minimum 6 characters</small>
     </div>
 
@@ -51,8 +59,12 @@
     </div>
 
     <button type="submit" [disabled]="registerForm.invalid || isLoading">
-      <span *ngIf="!isLoading">Create Account</span>
-      <span *ngIf="isLoading">Creating Account...</span>
+      @if (!isLoading) {
+      <span>Create Account</span>
+      }
+      @if (isLoading) {
+      <span>Creating Account...</span>
+      }
     </button>
   </form>
 

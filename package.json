@@ -1,5 +1,5 @@
 {
-  "name": "krenter-website-7sept",
+  "name": "krenter-website",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:krenter-website-7sept": "node dist/krenter-website-7sept/server/server.mjs"
+    "serve:ssr:krenter-website": "node dist/krenter-website/server/server.mjs"
   },
   "private": true,
   "packageManager": "npm@12.0.2",

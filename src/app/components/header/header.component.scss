@@ -1,0 +1,148 @@
+$primary-color: #ef8124;
+$primary-hover: #d96f16;
+
+.krenter-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+
+  .navbar {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+}
+
+.brand-logo {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-family: inherit;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* Nav Links */
+.navbar-nav {
+  .nav-link {
+    color: #333333 !important;
+    font-size: 0.92rem;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+
+    &:hover {
+      color: $primary-color !important;
+      background-color: rgba(239, 129, 36, 0.06);
+    }
+
+    &.active {
+      color: $primary-color !important;
+      font-weight: 600 !important;
+
+      @media (min-width: 992px) {
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 2.5px;
+          background-color: $primary-color;
+          border-radius: 2px;
+        }
+      }
+
+      @media (max-width: 991.98px) {
+        background-color: rgba(239, 129, 36, 0.1);
+      }
+    }
+  }
+}
+
+/* User Avatar & Role Badge */
+.user-avatar-badge {
+  width: 32px;
+  height: 32px;
+  font-size: 0.8rem;
+  background: linear-gradient(135deg, $primary-color 0%, #f79e4d 100%);
+  flex-shrink: 0;
+}
+
+.role-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.45rem;
+}
+
+.text-primary {
+  color: $primary-color !important;
+}
+
+.bg-primary-subtle {
+  background-color: rgba(239, 129, 36, 0.12) !important;
+}
+
+.border-primary-subtle {
+  border-color: rgba(239, 129, 36, 0.3) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: $primary-color !important;
+  border-color: $primary-color !important;
+  transition: all 0.2s ease-in-out;
+
+  &:hover, &:focus, &:active {
+    background-color: $primary-hover !important;
+    border-color: $primary-hover !important;
+    transform: translateY(-1px);
+  }
+}
+
+.navbar-toggler {
+  border-color: transparent !important;
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+/* Mobile Collapse Styling */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+
+    .nav-item {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-link {
+      padding: 0.65rem 1rem !important;
+    }
+  }
+}

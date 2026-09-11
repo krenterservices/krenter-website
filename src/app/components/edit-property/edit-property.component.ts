@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PropertyService } from '../../services/property.service';
+import { SeoService } from '../../services/seo.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-property.component.scss']
 })
 export class EditPropertyComponent implements OnInit {
+  private readonly seoService = inject(SeoService);
   propertyForm: FormGroup;
   propertyId: string = '';
   isLoading = true;
@@ -34,6 +36,7 @@ export class EditPropertyComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.seoService.setNoIndex('Edit Property');
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.propertyId = id;

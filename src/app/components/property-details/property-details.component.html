@@ -1,4 +1,5 @@
-<div *ngIf="property" class="details-container">
+@if (property) {
+<div class="details-container">
   <div class="property-header">
     <h1>{{ property.name }}</h1>
     <p class="location">{{ property.location }}</p>
@@ -18,10 +19,12 @@
     </button>
   </div>
 </div>
+}
 
+@if (showModal) {
 <app-rent-confirmation-modal
-  *ngIf="showModal"
   [property]="property"
   (confirm)="onConfirmRent()"
   (cancel)="onCancelRent()">
 </app-rent-confirmation-modal>
+}

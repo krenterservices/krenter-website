@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PropertyService } from '../../services/property.service';
+import { SeoService } from '../../services/seo.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
   templateUrl: './add-property.component.html',
   styleUrls: ['./add-property.component.scss']
 })
-export class AddPropertyComponent {
+export class AddPropertyComponent implements OnInit {
+  private readonly seoService = inject(SeoService);
   propertyForm: FormGroup;
 
   constructor(
@@ -25,6 +27,10 @@ export class AddPropertyComponent {
       price: ['', [Validators.required, Validators.min(0)]],
       location: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    this.seoService.setNoIndex('Add Property');
   }
 
   onSubmit() {

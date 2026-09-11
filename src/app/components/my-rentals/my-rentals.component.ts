@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { PropertyService, Rental, Property } from '../../services/property.service';
 import { AuthService, KrenterUser } from '../../services/auth.service';
+import { SeoService } from '../../services/seo.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Subscription } from 'rxjs';
 
 interface RentalWithProperty extends Rental {
@@ -19,6 +19,7 @@ interface RentalWithProperty extends Rental {
   styleUrls: ['./my-rentals.component.scss']
 })
 export class MyRentalsComponent implements OnInit, OnDestroy {
+  private readonly seoService = inject(SeoService);
   myRentals: RentalWithProperty[] = [];
   currentUser: KrenterUser | null = null;
   isLoading = true;
@@ -31,6 +32,7 @@ export class MyRentalsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.seoService.setNoIndex('My Rentals');
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
       if (user && user.role === 'renter') {

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { SupportComponent } from './support.component';
 
@@ -8,7 +9,8 @@ describe('SupportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SupportComponent]
+      imports: [SupportComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
 
@@ -32,9 +34,10 @@ describe('SupportComponent', () => {
     expect(logo).toBeTruthy();
   });
 
-  it('should display navbar component', () => {
+  it('should link to privacy policy', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('app-navbar')).toBeTruthy();
+    const privacyLink = compiled.querySelector('a[routerLink="/privacy-policy"]');
+    expect(privacyLink).toBeTruthy();
   });
 
   it('should contain features section', () => {

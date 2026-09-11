@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+// Global styles and Bootstrap SCSS entry point
+// Prefer SCSS-based Bootstrap usage so components can use Bootstrap variables, mixins, and utilities.
+// To customize Bootstrap theme variables, set them here BEFORE importing Bootstrap (example commented below).
+
+// Example to override primary color (uncomment and set before importing Bootstrap):
+// $theme-colors: ("primary": #0d6efd, "secondary": #6c757d);
+
+// Import Bootstrap SCSS (uses the package's scss files). This makes Bootstrap variables, mixins and utilities available.
+@import "bootstrap/scss/bootstrap";
+
+// Place any global project-wide styles below. Keep UI-specific overrides scoped to component .scss files where possible.
+body {
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+

@@ -2,17 +2,22 @@
   <h2>My Rentals</h2>
 
   <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading-state">
+  @if (isLoading) {
+  <div class="loading-state">
     <p>Loading your rentals...</p>
   </div>
+  }
 
   <!-- Error Message -->
-  <div *ngIf="errorMessage && !isLoading" class="error-message">
+  @if (errorMessage && !isLoading) {
+  <div class="error-message">
     {{ errorMessage }}
   </div>
+  }
 
   <!-- Rentals List -->
-  <div *ngIf="!isLoading && myRentals.length > 0" class="rentals-list">
+  @if (!isLoading && myRentals.length > 0) {
+  <div class="rentals-list">
     <div *ngFor="let rental of myRentals" class="rental-card">
       <div class="rental-header">
         <div class="rental-title">
@@ -50,31 +55,42 @@
             <span class="label">Start Date:</span>
             <span class="value">{{ rental.startDate | date:'medium' }}</span>
           </div>
-          <div class="info-item" *ngIf="rental.endDate">
+          @if (rental.endDate) {
+          <div class="info-item">
             <span class="label">End Date:</span>
             <span class="value">{{ rental.endDate | date:'medium' }}</span>
           </div>
-          <div class="info-item" *ngIf="rental.endDate && rental.status === 'active'">
+          }
+          @if (rental.endDate && rental.status === 'active') {
+          <div class="info-item">
             <span class="label">Days Remaining:</span>
             <span class="value">{{ getRemainingDays(rental.endDate) }} days</span>
           </div>
+          }
         </div>
 
-        <div class="info-section" *ngIf="rental.rentalDetails">
+        @if (rental.rentalDetails) {
+        <div class="info-section">
           <h4>Additional Details</h4>
-          <div class="info-item" *ngIf="rental.rentalDetails.deposit">
+          @if (rental.rentalDetails.deposit) {
+          <div class="info-item">
             <span class="label">Deposit:</span>
             <span class="value">${{ rental.rentalDetails.deposit }}</span>
           </div>
+          }
         </div>
+        }
       </div>
     </div>
   </div>
+  }
 
   <!-- No Rentals State -->
-  <div *ngIf="!isLoading && myRentals.length === 0 && !errorMessage" class="empty-state">
+  @if (!isLoading && myRentals.length === 0 && !errorMessage) {
+  <div class="empty-state">
     <p>You haven't rented any properties yet.</p>
     <p>Browse available properties to start renting!</p>
     <a routerLink="/properties" class="browse-button">Browse Properties</a>
   </div>
+  }
 </div>
