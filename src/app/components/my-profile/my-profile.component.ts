@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService, KrenterUser } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { SeoService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,6 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit, OnDestroy {
+  private readonly seoService = inject(SeoService);
   profileForm: FormGroup;
   currentUser: KrenterUser | null = null;
   isLoading = false;
@@ -33,6 +35,7 @@ export class MyProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.seoService.setNoIndex('My Profile');
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       if (user) {
         this.currentUser = user;

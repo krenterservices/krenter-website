@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService, KrenterUser } from '../../services/auth.service';
 import { Property, PropertyService, Rental } from '../../services/property.service';
+import { SeoService } from '../../services/seo.service';
 
 interface RentalWithProperty extends Rental {
   property?: Property;
@@ -17,6 +18,7 @@ interface RentalWithProperty extends Rental {
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  private readonly seoService = inject(SeoService);
   currentUser: KrenterUser | null = null;
   ownedProperties: Property[] = [];
   rentedProperties: RentalWithProperty[] = [];
@@ -32,6 +34,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.seoService.setNoIndex('Dashboard');
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
       if (user) {

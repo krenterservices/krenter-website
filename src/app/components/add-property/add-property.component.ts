@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PropertyService } from '../../services/property.service';
+import { SeoService } from '../../services/seo.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-property',
@@ -12,14 +12,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './add-property.component.html',
   styleUrls: ['./add-property.component.scss']
 })
-export class AddPropertyComponent {
+export class AddPropertyComponent implements OnInit {
+  private readonly seoService = inject(SeoService);
   propertyForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private propertyService: PropertyService,
-    private router: Router,
-    private authService: AuthService
+    private router: Router
   ) {
     this.propertyForm = this.fb.group({
       name: ['', Validators.required],
@@ -29,19 +29,15 @@ export class AddPropertyComponent {
     });
   }
 
-  onSubmit() {
-    const currentUser = this.authService.getCurrentUserSync();
+  ngOnInit(): void {
+    this.seoService.setNoIndex('Add Property');
+  }
 
-    if (this.propertyForm.valid && currentUser) {
-      void this.propertyService.addProperty({
-        ...this.propertyForm.value,
-        ownerId: currentUser.uid,
-        isAvailable: true
-      }).then(propertyId => {
-        if (propertyId) {
-          void this.router.navigate(['/dashboard']);
-        }
-      });
+  onSubmit() {
+    if (this.propertyForm.valid) {
+      // In a real app, you'd get the owner's ID from the auth service
+      this.propertyService.addProperty({ ...this.propertyForm.value, ownerId: 1 });
+      this.router.navigate(['/my-properties']);
     }
   }
 }

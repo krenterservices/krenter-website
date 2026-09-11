@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
+import { SeoService } from '../../services/seo.service';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -11,29 +11,25 @@ import { Title, Meta } from '@angular/platform-browser';
   styleUrl: './privacy-policy.component.scss',
 })
 export class PrivacyPolicyComponent implements OnInit {
-  private readonly titleService = inject(Title);
-  private readonly metaService = inject(Meta);
+  private readonly seoService = inject(SeoService);
 
   readonly lastModifiedDate = 'September 11, 2026';
   readonly contactEmail = 'support@krenter.app';
 
   ngOnInit(): void {
-    this.titleService.setTitle('Privacy Policy | Krenter Property Management');
-
-    this.metaService.updateTag({
-      name: 'description',
-      content:
+    this.seoService.setSeoData({
+      title: 'Privacy Policy | Krenter Property Management',
+      description:
         'Privacy Policy for Krenter web and mobile applications (iOS and Android). Learn how Krenter collects, protects, and manages your personal data in compliance with GDPR, CCPA, and App Store guidelines.',
-    });
-    this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
-    this.metaService.updateTag({ property: 'og:title', content: 'Privacy Policy | Krenter' });
-    this.metaService.updateTag({
-      property: 'og:description',
-      content:
+      keywords:
+        'Krenter privacy policy, data privacy, property management privacy, GDPR, CCPA, user data protection',
+      canonicalUrl: 'https://krenter.org/privacy-policy',
+      ogTitle: 'Privacy Policy | Krenter',
+      ogDescription:
         'Learn how Krenter protects your privacy across our web platform and iOS/Android mobile applications.',
+      ogImage: '/krenter-logo.png',
+      ogType: 'article'
     });
-    this.metaService.updateTag({ property: 'og:image', content: '/krenter-logo.png' });
-    this.metaService.updateTag({ property: 'og:type', content: 'article' });
   }
 
   scrollToSection(sectionId: string, event: Event): void {

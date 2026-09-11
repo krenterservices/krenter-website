@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { PropertyService, Property, Rental } from '../../services/property.service';
 import { UserService } from '../../services/user.service';
 import { AuthService, KrenterUser } from '../../services/auth.service';
+import { SeoService } from '../../services/seo.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -18,6 +19,7 @@ interface PropertyWithRenters extends Property {
   styleUrls: ['./my-properties.component.scss']
 })
 export class MyPropertiesComponent implements OnInit, OnDestroy {
+  private readonly seoService = inject(SeoService);
   myProperties: PropertyWithRenters[] = [];
   currentUser: KrenterUser | null = null;
   isLoading = true;
@@ -32,6 +34,7 @@ export class MyPropertiesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.seoService.setNoIndex('My Properties');
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
       if (user && user.role === 'owner') {

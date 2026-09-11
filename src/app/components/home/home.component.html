@@ -1,7 +1,346 @@
-<div class="hero-section">
-  <div class="hero-content">
-    <h1>Find Your Perfect Rental</h1>
-    <p>Krenter connects you with the best properties from trusted owners.</p>
-    <a routerLink="/properties" class="cta-button">Explore Properties</a>
-  </div>
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero-section text-white d-flex align-items-center">
+    <div class="container py-5">
+      <div class="row align-items-center justify-content-center text-center">
+        <div class="col-lg-10 col-xl-9">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-white bg-opacity-20 backdrop-blur mb-3 hero-badge">
+            <span class="badge bg-warning text-dark fw-bold rounded-pill">New</span>
+            <span class="small text-white">The Modern Solution for Landlords & Tenants</span>
+          </div>
+          <h1 class="display-4 fw-bold mb-3 tracking-tight">
+            All-in-One Property Management & Rental Solutions
+          </h1>
+          <p class="lead mb-4 opacity-90 mx-auto max-w-750">
+            Krenter is the trusted solution provider for both property owners and renters in their respective local areas.
+            Collect and pay rent smoothly online, resolve tenant service and maintenance requests quickly, and manage all your renting services effortlessly.
+          </p>
+          <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+            <a routerLink="/properties" class="btn btn-warning btn-lg fw-bold px-4 py-3 rounded-pill shadow-sm text-dark cta-primary">
+              <i class="bi bi-search me-2"></i>Explore Properties
+            </a>
+            <a routerLink="/register" class="btn btn-outline-light btn-lg fw-semibold px-4 py-3 rounded-pill cta-secondary">
+              Get Started Free
+            </a>
+          </div>
+          <div class="d-flex flex-wrap justify-content-center gap-4 text-white opacity-80 small pt-2">
+            <span><i class="bi bi-check-circle-fill text-warning me-1"></i>Smooth Online Rent Payments</span>
+            <span><i class="bi bi-check-circle-fill text-warning me-1"></i>Tenant Service Requests</span>
+            <span><i class="bi bi-check-circle-fill text-warning me-1"></i>Local Area Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions for Owners & Renters -->
+  <section class="py-5 bg-light">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="text-primary fw-bold text-uppercase tracking-wide small">Tailored Solutions</span>
+        <h2 class="display-6 fw-bold text-dark mt-1">Built for Both Landlords and Tenants</h2>
+        <p class="text-muted mx-auto max-w-600">
+          Whether you manage a single property or multiple units across your area, or you're looking for your next home, Krenter delivers a seamless renting experience.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- For Owners & Landlords -->
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-lg-5 solution-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="solution-icon-wrapper rounded-3 bg-primary-subtle text-primary d-flex align-items-center justify-content-center">
+                <i class="bi bi-building fs-3"></i>
+              </div>
+              <div>
+                <span class="badge bg-primary text-white rounded-pill px-3 py-1">For Landlords</span>
+                <h3 class="h4 fw-bold text-dark mb-0 mt-1">Property Owners & Managers</h3>
+              </div>
+            </div>
+            <p class="text-muted mb-4">
+              Maximize your rental yield and minimize vacancy with centralized tools built specifically for independent property owners in their local areas.
+            </p>
+            <ul class="list-unstyled mb-4 d-flex flex-column gap-3 text-secondary">
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                <div>
+                  <strong class="text-dark">Smooth Online Rent Collection:</strong>
+                  <span> Automated recurring rent payments deposited directly to your bank account without delays.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                <div>
+                  <strong class="text-dark">Tenant Maintenance Dispatch:</strong>
+                  <span> Receive photo-backed service requests instantly and track contractor repairs in real time.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                <div>
+                  <strong class="text-dark">Local Property Listings:</strong>
+                  <span> Showcase your homes, flats, and apartments to verified local tenants with full amenity details.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                <div>
+                  <strong class="text-dark">End-to-End Lease Management:</strong>
+                  <span> Organize rental contracts, security deposits, and tenant communications in one place.</span>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-auto pt-2">
+              <a routerLink="/register" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold">
+                List Your Property
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- For Renters & Tenants -->
+        <div class="col-md-6">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 p-lg-5 solution-card">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="solution-icon-wrapper rounded-3 bg-success-subtle text-success d-flex align-items-center justify-content-center">
+                <i class="bi bi-house-door fs-3"></i>
+              </div>
+              <div>
+                <span class="badge bg-success text-white rounded-pill px-3 py-1">For Tenants</span>
+                <h3 class="h4 fw-bold text-dark mb-0 mt-1">Renters & Residents</h3>
+              </div>
+            </div>
+            <p class="text-muted mb-4">
+              Enjoy a modern, stress-free renting lifestyle with transparent communication, convenient digital payments, and fast maintenance response times.
+            </p>
+            <ul class="list-unstyled mb-4 d-flex flex-column gap-3 text-secondary">
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                <div>
+                  <strong class="text-dark">Effortless Rent Payments:</strong>
+                  <span> Pay rent safely using your preferred bank ACH, debit, or credit card with instant receipts.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                <div>
+                  <strong class="text-dark">Instant Service Requests:</strong>
+                  <span> Submit plumbing, electrical, or general repair requests directly to your landlord with photos.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                <div>
+                  <strong class="text-dark">Browse Local Area Rentals:</strong>
+                  <span> Search verified apartments and houses in your target neighborhood with transparent pricing.</span>
+                </div>
+              </li>
+              <li class="d-flex align-items-start gap-2">
+                <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                <div>
+                  <strong class="text-dark">Complete Rental History:</strong>
+                  <span> Access your rent payment receipts, lease details, and landlord contacts 24/7.</span>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-auto pt-2">
+              <a routerLink="/properties" class="btn btn-outline-dark rounded-pill px-4 py-2 fw-semibold">
+                Find Your Next Home
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Platform Features -->
+  <section class="py-5 bg-white">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="text-primary fw-bold text-uppercase tracking-wide small">Core Features</span>
+        <h2 class="display-6 fw-bold text-dark mt-1">Everything You Need to Manage Rentals</h2>
+        <p class="text-muted mx-auto max-w-600">
+          Krenter combines powerful property management tools with an intuitive user interface for modern landlords and tenants.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-sm-6">
+          <div class="p-4 rounded-4 border bg-light h-100 text-center feature-box">
+            <div class="feature-icon mb-3 mx-auto rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-credit-card-2-front text-primary fs-3"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Smooth Rent Payments</h4>
+            <p class="small text-muted mb-0">
+              Automated recurring rent, flexible payment options, and automated transaction receipts for clear financial records.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <div class="p-4 rounded-4 border bg-light h-100 text-center feature-box">
+            <div class="feature-icon mb-3 mx-auto rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-tools text-primary fs-3"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Service Requests</h4>
+            <p class="small text-muted mb-0">
+              Submit and track tenant maintenance tickets with photo uploads, priority tags, and status updates until resolved.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <div class="p-4 rounded-4 border bg-light h-100 text-center feature-box">
+            <div class="feature-icon mb-3 mx-auto rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-geo-alt text-primary fs-3"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Local Area Control</h4>
+            <p class="small text-muted mb-0">
+              Manage properties across your geographic area. Connect local owners with verified local tenants seamlessly.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <div class="p-4 rounded-4 border bg-light h-100 text-center feature-box">
+            <div class="feature-icon mb-3 mx-auto rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-shield-check text-primary fs-3"></i>
+            </div>
+            <h4 class="h5 fw-bold text-dark mb-2">Full Rental Services</h4>
+            <p class="small text-muted mb-0">
+              Digital leases, tenant communications, role-based dashboards, and complete document management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Apps Section -->
+  <section class="py-5 bg-light border-top border-bottom">
+    <div class="container py-4">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-1 mb-2">Mobile Ready</span>
+          <h2 class="display-6 fw-bold text-dark mb-3">Manage Properties Anywhere with the Krenter App</h2>
+          <p class="lead text-muted mb-4">
+            Available on iOS and Android. Landlords can approve maintenance requests and track payments on the go, while tenants can pay rent in seconds.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-dark d-inline-flex align-items-center gap-2 px-4 py-2 rounded-3 shadow-sm">
+              <img src="/AppIcons/appstore.png" alt="App Store" style="height: 22px;" />
+              <div class="text-start lh-1">
+                <div class="small opacity-75" style="font-size: 0.7rem;">Download on the</div>
+                <div class="fw-bold">App Store</div>
+              </div>
+            </a>
+            <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-dark d-inline-flex align-items-center gap-2 px-4 py-2 rounded-3 shadow-sm">
+              <img src="/AppIcons/playstore.png" alt="Google Play" style="height: 22px;" />
+              <div class="text-start lh-1">
+                <div class="small opacity-75" style="font-size: 0.7rem;">GET IT ON</div>
+                <div class="fw-bold">Google Play</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-center">
+          <div class="p-4 bg-white rounded-4 shadow-sm border d-inline-block">
+            <img src="/krenter-logo.png" alt="Krenter App" class="img-fluid mb-3" style="max-height: 80px;" />
+            <h5 class="fw-bold text-dark mb-1">Krenter Rental Platform</h5>
+            <p class="small text-muted mb-0">Smooth Renting for Everyone</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO Frequently Asked Questions Section -->
+  <section class="py-5 bg-white" id="home-faqs">
+    <div class="container py-4">
+      <div class="text-center mb-5">
+        <span class="text-primary fw-bold text-uppercase tracking-wide small">Got Questions?</span>
+        <h2 class="display-6 fw-bold text-dark mt-1">Frequently Asked Questions</h2>
+        <p class="text-muted mx-auto max-w-600">
+          Learn how Krenter simplifies rental management and payments for owners and renters.
+        </p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="accordion accordion-flush" id="homeFaqAccordion">
+            <div class="accordion-item border rounded-3 mb-3">
+              <h3 class="accordion-header">
+                <button class="accordion-button fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true">
+                  What is Krenter and who is it for?
+                </button>
+              </h3>
+              <div id="faqOne" class="accordion-collapse collapse show">
+                <div class="accordion-body text-secondary">
+                  Krenter is an all-in-one property management solution designed for independent property owners, landlords, renters, and tenants. It empowers owners to manage rentals across their respective local areas, while giving tenants an easy way to pay rent and submit service requests.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border rounded-3 mb-3">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                  How does Krenter handle rent payments smoothly?
+                </button>
+              </h3>
+              <div id="faqTwo" class="accordion-collapse collapse">
+                <div class="accordion-body text-secondary">
+                  Krenter provides secure, automated digital payment processing. Renters can set up auto-pay using bank ACH transfers, debit cards, or credit cards. Landlords receive funds directly with automatic receipts, eliminating late checks and manual tracking.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border rounded-3 mb-3">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                  How do tenants submit maintenance and service requests?
+                </button>
+              </h3>
+              <div id="faqThree" class="accordion-collapse collapse">
+                <div class="accordion-body text-secondary">
+                  Tenants can file service tickets directly via the web or mobile app. They can describe the issue, set urgency levels, and upload photos. Property owners receive instant notifications and can coordinate contractors and update repair progress in real time.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item border rounded-3 mb-3">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">
+                  Can landlords manage properties in their specific local areas?
+                </button>
+              </h3>
+              <div id="faqFour" class="accordion-collapse collapse">
+                <div class="accordion-body text-secondary">
+                  Yes! Krenter is built to support local area property management. Landlords can add properties with accurate addresses, neighborhood details, pricing, and custom amenities, connecting them directly with prospective tenants looking in those exact locations.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA Banner -->
+  <section class="py-5 bg-dark text-white text-center">
+    <div class="container py-4">
+      <h2 class="display-6 fw-bold mb-3">Ready to Streamline Your Rental Experience?</h2>
+      <p class="lead opacity-80 mb-4 mx-auto max-w-600">
+        Join hundreds of landlords and tenants already using Krenter for smooth payments and hassle-free property management.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <a routerLink="/register" class="btn btn-warning btn-lg fw-bold px-4 py-3 rounded-pill text-dark shadow">
+          Create Free Account
+        </a>
+        <a routerLink="/support" class="btn btn-outline-light btn-lg fw-semibold px-4 py-3 rounded-pill">
+          Contact Support
+        </a>
+      </div>
+    </div>
+  </section>
 </div>

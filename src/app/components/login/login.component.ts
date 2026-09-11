@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { SeoService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,6 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private readonly seoService = inject(SeoService);
   loginForm: FormGroup;
   loginError = '';
   isLoading = false;
@@ -25,6 +27,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.seoService.setSeoData({
+      title: 'Sign In to Your Account | Krenter Property Management',
+      description:
+        'Sign in to Krenter to manage your rental properties, collect rent payments, or submit tenant maintenance requests.',
+      robots: 'noindex, follow',
+      canonicalUrl: 'https://krenter.org/login'
+    });
+
     // Subscribe to loading state
     this.loadingSubscription = this.authService.isLoading.subscribe(loading => {
       this.isLoading = loading;

@@ -1,0 +1,24 @@
+# Krenter Robots.txt
+# https://krenter.org
+
+User-agent: *
+Allow: /
+Allow: /properties
+Allow: /property/*
+Allow: /support
+Allow: /privacy-policy
+Allow: /privacypolicy
+Allow: /terms
+Allow: /terms-of-use
+Allow: /termsofuse
+
+# Disallow private/authenticated application dashboards
+Disallow: /dashboard
+Disallow: /my-properties
+Disallow: /my-rentals
+Disallow: /my-profile
+Disallow: /add-property
+Disallow: /edit-property/
+
+# Sitemap location
+Sitemap: https://krenter.org/sitemap.xml
