@@ -37,8 +37,10 @@ export class MyPropertiesComponent implements OnInit, OnDestroy {
     this.seoService.setNoIndex('My Properties');
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
-      if (user && user.role === 'owner') {
-        this.loadProperties(user.uid);
+      if (user && (this.authService.isOwner(user) || this.authService.isManager(user))) {
+        this.loadProperties(user);
+      } else {
+        this.isLoading = false;
       }
     });
   }
@@ -49,11 +51,25 @@ export class MyPropertiesComponent implements OnInit, OnDestroy {
     }
   }
 
-  async loadProperties(ownerId: string): Promise<void> {
+  async loadProperties(user: KrenterUser): Promise<void> {
     try {
       this.isLoading = true;
       this.errorMessage = '';
-      const properties = await this.propertyService.getPropertiesByOwner(ownerId);
+
+      // Query by owner UID and owner Email
+      const ownerProps = await this.propertyService.getPropertiesByOwner(user.uid, user.email);
+
+      // Also query if user is registered as property manager
+      const managerProps = user.email ? await this.propertyService.getPropertiesByManagerEmail(user.email, user.phone) : [];
+
+      // Combine and deduplicate
+      const propMap = new Map<string, Property>();
+      for (const p of [...ownerProps, ...managerProps]) {
+        if (p.id) {
+          propMap.set(p.id, p);
+        }
+      }
+      const properties = Array.from(propMap.values());
 
       // Load renters for each property
       this.myProperties = await Promise.all(
@@ -78,7 +94,7 @@ export class MyPropertiesComponent implements OnInit, OnDestroy {
       try {
         const success = await this.propertyService.deleteProperty(propertyId);
         if (success && this.currentUser) {
-          await this.loadProperties(this.currentUser.uid);
+          await this.loadProperties(this.currentUser);
         } else {
           this.errorMessage = 'Failed to delete property.';
         }
@@ -103,7 +119,7 @@ export class MyPropertiesComponent implements OnInit, OnDestroy {
     this.expandedPropertyId = this.expandedPropertyId === propertyId ? null : propertyId;
   }
 
-  getStatusBadge(isAvailable: boolean): string {
+  getStatusBadge(isAvailable?: boolean): string {
     return isAvailable ? 'Available' : 'Rented';
   }
 }

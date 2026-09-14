@@ -1,0 +1,427 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xl-10">
+      <!-- Header Banner -->
+      <div class="text-center mb-5">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fw-semibold mb-2">
+          Owner Portal
+        </span>
+        <h1 class="display-6 fw-bold mb-2">Onboard Your Property</h1>
+        <p class="lead text-muted mx-auto" style="max-width: 650px;">
+          List your real estate on Krenter. Once submitted, you will be registered as the property owner and can delegate access to renters or property managers.
+        </p>
+      </div>
+
+      <!-- Alerts -->
+      @if (successMessage) {
+        <div class="alert alert-success d-flex align-items-center mb-4 p-3 shadow-sm rounded-3" role="alert">
+          <i class="bi bi-check-circle-fill fs-4 me-3 text-success"></i>
+          <div>
+            <strong>Success!</strong> {{ successMessage }}
+            <div class="small mt-1">Redirecting to your properties...</div>
+          </div>
+        </div>
+      }
+
+      @if (errorMessage) {
+        <div class="alert alert-danger d-flex align-items-center mb-4 p-3 shadow-sm rounded-3" role="alert">
+          <i class="bi bi-exclamation-triangle-fill fs-4 me-3 text-danger"></i>
+          <div>
+            <strong>Error:</strong> {{ errorMessage }}
+          </div>
+        </div>
+      }
+
+      <form [formGroup]="onboardingForm" (ngSubmit)="onSubmit()">
+        <!-- SECTION 1: Property Identity & Location -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-white border-0 pt-4 px-4 pb-0">
+            <h5 class="fw-bold mb-1 text-primary">
+              <i class="bi bi-geo-alt-fill me-2"></i>1. Property Location & Details
+            </h5>
+            <p class="text-muted small mb-0">Provide the property name, building/society, and physical location.</p>
+          </div>
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="name" class="form-label fw-semibold">Property Title / Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control form-control-lg"
+                  formControlName="name"
+                  placeholder="e.g. Skyline Luxury 2BHK"
+                  [class.is-invalid]="isFieldInvalid('name')"
+                />
+                @if (isFieldInvalid('name')) {
+                  <div class="invalid-feedback">Property title must be at least 3 characters.</div>
+                }
+              </div>
+
+              <div class="col-md-6">
+                <label for="society" class="form-label fw-semibold">Building / Society Name <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="society"
+                  class="form-control form-control-lg"
+                  formControlName="society"
+                  placeholder="e.g. Prestige Heights Society"
+                  [class.is-invalid]="isFieldInvalid('society')"
+                />
+                @if (isFieldInvalid('society')) {
+                  <div class="invalid-feedback">Building or society name is required.</div>
+                }
+              </div>
+
+              <div class="col-12">
+                <label for="address" class="form-label fw-semibold">Street Address <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="address"
+                  class="form-control form-control-lg"
+                  formControlName="address"
+                  placeholder="e.g. Flat 402, Tower B, MG Road"
+                  [class.is-invalid]="isFieldInvalid('address')"
+                />
+                @if (isFieldInvalid('address')) {
+                  <div class="invalid-feedback">Street address is required.</div>
+                }
+              </div>
+
+              <div class="col-md-4">
+                <label for="city" class="form-label fw-semibold">City <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="city"
+                  class="form-control"
+                  formControlName="city"
+                  placeholder="e.g. Bengaluru"
+                  [class.is-invalid]="isFieldInvalid('city')"
+                />
+                @if (isFieldInvalid('city')) {
+                  <div class="invalid-feedback">City is required.</div>
+                }
+              </div>
+
+              <div class="col-md-4">
+                <label for="state" class="form-label fw-semibold">State / Province <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="state"
+                  class="form-control"
+                  formControlName="state"
+                  placeholder="e.g. Karnataka"
+                  [class.is-invalid]="isFieldInvalid('state')"
+                />
+                @if (isFieldInvalid('state')) {
+                  <div class="invalid-feedback">State is required.</div>
+                }
+              </div>
+
+              <div class="col-md-2">
+                <label for="zipCode" class="form-label fw-semibold">Zip / Postal <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="zipCode"
+                  class="form-control"
+                  formControlName="zipCode"
+                  placeholder="560001"
+                  [class.is-invalid]="isFieldInvalid('zipCode')"
+                />
+                @if (isFieldInvalid('zipCode')) {
+                  <div class="invalid-feedback">Valid postal code is required.</div>
+                }
+              </div>
+
+              <div class="col-md-2">
+                <label for="country" class="form-label fw-semibold">Country <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  id="country"
+                  class="form-control"
+                  formControlName="country"
+                  placeholder="India"
+                  [class.is-invalid]="isFieldInvalid('country')"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: Property Specifications & Pricing -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-white border-0 pt-4 px-4 pb-0">
+            <h5 class="fw-bold mb-1 text-primary">
+              <i class="bi bi-sliders me-2"></i>2. Specifications & Monthly Rent
+            </h5>
+            <p class="text-muted small mb-0">Rooms, floor, parking, and monthly lease amount.</p>
+          </div>
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <div class="col-sm-6 col-md-3">
+                <label for="bedrooms" class="form-label fw-semibold">Bedrooms <span class="text-danger">*</span></label>
+                <select id="bedrooms" class="form-select" formControlName="bedrooms">
+                  <option value="1">1 BHK</option>
+                  <option value="2">2 BHK</option>
+                  <option value="3">3 BHK</option>
+                  <option value="4">4 BHK</option>
+                  <option value="5+">5+ BHK</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <label for="bathrooms" class="form-label fw-semibold">Bathrooms <span class="text-danger">*</span></label>
+                <select id="bathrooms" class="form-select" formControlName="bathrooms">
+                  <option value="1">1 Bath</option>
+                  <option value="2">2 Baths</option>
+                  <option value="3">3 Baths</option>
+                  <option value="4+">4+ Baths</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <label for="floorNumber" class="form-label fw-semibold">Floor Number</label>
+                <input type="text" id="floorNumber" class="form-control" formControlName="floorNumber" placeholder="e.g. 4" />
+              </div>
+
+              <div class="col-sm-6 col-md-3">
+                <label for="parking" class="form-label fw-semibold">Parking</label>
+                <input type="text" id="parking" class="form-control" formControlName="parking" placeholder="e.g. 1 Covered" />
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <label for="balcony" class="form-label fw-semibold">Balcony</label>
+                <input type="text" id="balcony" class="form-control" formControlName="balcony" placeholder="e.g. 2 Balconies" />
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <label for="price" class="form-label fw-semibold">Monthly Rent (₹ / $) <span class="text-danger">*</span></label>
+                <input
+                  type="number"
+                  id="price"
+                  class="form-control"
+                  formControlName="price"
+                  placeholder="15000"
+                  [class.is-invalid]="isFieldInvalid('price')"
+                />
+                @if (isFieldInvalid('price')) {
+                  <div class="invalid-feedback">Valid rent amount is required.</div>
+                }
+              </div>
+
+              <div class="col-md-4">
+                <label for="photoUrl" class="form-label fw-semibold">Photo URL</label>
+                <input type="url" id="photoUrl" class="form-control" formControlName="photoUrl" placeholder="https://..." />
+              </div>
+
+              <div class="col-12">
+                <label for="description" class="form-label fw-semibold">Description</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  rows="3"
+                  formControlName="description"
+                  placeholder="Spacious and sunny apartment with modern kitchen, close to public transport and parks..."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: Owner Details (Autofilled) -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-white border-0 pt-4 px-4 pb-0">
+            <h5 class="fw-bold mb-1 text-primary">
+              <i class="bi bi-person-badge-fill me-2"></i>3. Owner Contact Information
+            </h5>
+            <p class="text-muted small mb-0">These details link ownership to your account.</p>
+          </div>
+          <div class="card-body p-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="ownerEmailId" class="form-label fw-semibold">Owner Email <span class="text-danger">*</span></label>
+                <input
+                  type="email"
+                  id="ownerEmailId"
+                  class="form-control bg-light"
+                  formControlName="ownerEmailId"
+                  [readonly]="!!currentUser?.email"
+                  [class.is-invalid]="isFieldInvalid('ownerEmailId')"
+                />
+                @if (isFieldInvalid('ownerEmailId')) {
+                  <div class="invalid-feedback">Valid owner email is required.</div>
+                }
+              </div>
+
+              <div class="col-md-6">
+                <label for="ownerPhoneNumber" class="form-label fw-semibold">Owner Phone Number</label>
+                <input
+                  type="tel"
+                  id="ownerPhoneNumber"
+                  class="form-control"
+                  formControlName="ownerPhoneNumber"
+                  placeholder="+91 9876543210"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: Tenant Assignment (Optional) -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="fw-bold mb-1 text-success">
+                <i class="bi bi-people-fill me-2"></i>4. Assign Renter / Tenant (Optional)
+              </h5>
+              <p class="text-muted small mb-0">
+                Renters can <strong>only</strong> access this property if their email or phone number is registered here.
+              </p>
+            </div>
+            <div class="form-check form-switch fs-5">
+              <input
+                class="form-check-input cursor-pointer"
+                type="checkbox"
+                id="assignTenant"
+                formControlName="assignTenant"
+                (change)="onToggleTenant()"
+              />
+            </div>
+          </div>
+          <div class="card-body p-4">
+            @if (onboardingForm.get('assignTenant')?.value) {
+              <div class="bg-success-subtle p-3 rounded-3 mb-3 border border-success-subtle">
+                <i class="bi bi-info-circle-fill text-success me-2"></i>
+                <small class="text-success-emphasis">
+                  Adding tenant email or phone will immediately grant them access to this property's portal and lease summary.
+                </small>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label for="renterFirstName" class="form-label fw-semibold">Tenant First Name</label>
+                  <input type="text" id="renterFirstName" class="form-control" formControlName="renterFirstName" placeholder="Jane" />
+                </div>
+
+                <div class="col-sm-6">
+                  <label for="renterLastName" class="form-label fw-semibold">Tenant Last Name</label>
+                  <input type="text" id="renterLastName" class="form-control" formControlName="renterLastName" placeholder="Smith" />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="renterEmailId" class="form-label fw-semibold">Tenant Email Address</label>
+                  <input type="email" id="renterEmailId" class="form-control" formControlName="renterEmailId" placeholder="tenant@example.com" />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="renterPhoneNumber" class="form-label fw-semibold">Tenant Phone Number</label>
+                  <input type="tel" id="renterPhoneNumber" class="form-control" formControlName="renterPhoneNumber" placeholder="+91 9999999999" />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="rentStartDate" class="form-label fw-semibold">Lease Start Date</label>
+                  <input type="date" id="rentStartDate" class="form-control" formControlName="rentStartDate" />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="rentEndDate" class="form-label fw-semibold">Lease End Date</label>
+                  <input type="date" id="rentEndDate" class="form-control" formControlName="rentEndDate" />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="securityDeposit" class="form-label fw-semibold">Security Deposit</label>
+                  <input type="text" id="securityDeposit" class="form-control" formControlName="securityDeposit" placeholder="e.g. 50000" />
+                </div>
+              </div>
+            } @else {
+              <div class="text-muted small py-2">
+                <i class="bi bi-dash-circle me-1"></i> No tenant currently assigned. Property will be marked available for rent.
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- SECTION 5: Property Manager Assignment (Optional) -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+          <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="fw-bold mb-1 text-info">
+                <i class="bi bi-person-gear me-2"></i>5. Assign Property Manager (Optional)
+              </h5>
+              <p class="text-muted small mb-0">
+                Property managers can <strong>only</strong> access and manage this property if their email or phone number is entered here.
+              </p>
+            </div>
+            <div class="form-check form-switch fs-5">
+              <input
+                class="form-check-input cursor-pointer"
+                type="checkbox"
+                id="assignManager"
+                formControlName="assignManager"
+                (change)="onToggleManager()"
+              />
+            </div>
+          </div>
+          <div class="card-body p-4">
+            @if (onboardingForm.get('assignManager')?.value) {
+              <div class="bg-info-subtle p-3 rounded-3 mb-3 border border-info-subtle">
+                <i class="bi bi-shield-check text-info me-2"></i>
+                <small class="text-info-emphasis">
+                  Delegating management allows this manager to coordinate maintenance, oversee tenants, and inspect details.
+                </small>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="propertyManagerEmailId" class="form-label fw-semibold">Manager Email Address</label>
+                  <input
+                    type="email"
+                    id="propertyManagerEmailId"
+                    class="form-control"
+                    formControlName="propertyManagerEmailId"
+                    placeholder="manager@agency.com"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="propertyManagerPhoneNumber" class="form-label fw-semibold">Manager Phone Number</label>
+                  <input
+                    type="tel"
+                    id="propertyManagerPhoneNumber"
+                    class="form-control"
+                    formControlName="propertyManagerPhoneNumber"
+                    placeholder="+91 8888888888"
+                  />
+                </div>
+              </div>
+            } @else {
+              <div class="text-muted small py-2">
+                <i class="bi bi-dash-circle me-1"></i> No property manager currently assigned. You will be managing this property directly.
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Submission Actions -->
+        <div class="d-flex flex-column flex-sm-row justify-content-end gap-3 mb-5">
+          <a routerLink="/my-properties" class="btn btn-outline-secondary btn-lg px-4">
+            Cancel
+          </a>
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg px-5 fw-bold shadow-sm"
+            [disabled]="isLoading || onboardingForm.invalid"
+          >
+            @if (!isLoading) {
+              <i class="bi bi-check2-circle me-2"></i>
+              <span>Onboard Property & Register as Owner</span>
+            } @else {
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              <span>Onboarding Property...</span>
+            }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

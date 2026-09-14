@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // User profile documents
+    match /users/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Properties: public to read, authenticated owners to create/edit
+    match /properties/{document=**} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.ownerId;
+    }
+
+    // Rentals and Renters agreements
+    match /rentals/{document=**} {
+      allow read, create: if request.auth != null;
+      allow update, delete: if request.auth != null && (request.auth.uid == resource.data.ownerId || request.auth.uid == resource.data.renterId);
+    }
+    match /renters/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Deletion requests: Public create required by Google Play & Apple App Store data safety policies
+    match /deletion_requests/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Email queue for Firebase Trigger Email extension
+    match /mail/{document=**} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // In-app messaging
+    match /messages/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Payment and transaction records
+    match /payments/{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

@@ -47,10 +47,30 @@ export class UserService {
   async getOwners(): Promise<KrenterUser[]> {
     try {
       const usersCollection = collection(this.firestore, 'users');
-      const ownersQuery = query(usersCollection, where('role', '==', 'owner'));
-      const querySnapshot = await getDocs(ownersQuery);
+      const userMap = new Map<string, KrenterUser>();
 
-      return querySnapshot.docs.map(doc => doc.data() as KrenterUser);
+      const arrayQuery = query(usersCollection, where('roles', 'array-contains', 'owner'));
+      const arraySnapshot = await getDocs(arrayQuery);
+      arraySnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      const legacyOwnerQuery = query(usersCollection, where('role', '==', 'owner'));
+      const legacySnapshot = await getDocs(legacyOwnerQuery);
+      legacySnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      const legacyBothQuery = query(usersCollection, where('role', '==', 'both'));
+      const bothSnapshot = await getDocs(legacyBothQuery);
+      bothSnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      return Array.from(userMap.values());
     } catch (error) {
       console.error('Error fetching owners:', error);
       return [];
@@ -63,10 +83,30 @@ export class UserService {
   async getRenters(): Promise<KrenterUser[]> {
     try {
       const usersCollection = collection(this.firestore, 'users');
-      const rentersQuery = query(usersCollection, where('role', '==', 'renter'));
-      const querySnapshot = await getDocs(rentersQuery);
+      const userMap = new Map<string, KrenterUser>();
 
-      return querySnapshot.docs.map(doc => doc.data() as KrenterUser);
+      const arrayQuery = query(usersCollection, where('roles', 'array-contains', 'renter'));
+      const arraySnapshot = await getDocs(arrayQuery);
+      arraySnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      const legacyRenterQuery = query(usersCollection, where('role', '==', 'renter'));
+      const legacySnapshot = await getDocs(legacyRenterQuery);
+      legacySnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      const legacyBothQuery = query(usersCollection, where('role', '==', 'both'));
+      const bothSnapshot = await getDocs(legacyBothQuery);
+      bothSnapshot.docs.forEach(docSnap => {
+        const data = docSnap.data();
+        userMap.set(docSnap.id, { ...data, id: docSnap.id, uid: data['uid'] || docSnap.id } as KrenterUser);
+      });
+
+      return Array.from(userMap.values());
     } catch (error) {
       console.error('Error fetching renters:', error);
       return [];

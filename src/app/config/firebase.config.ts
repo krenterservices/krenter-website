@@ -44,11 +44,31 @@ export const firebaseConfig = {
  *          allow create: if request.auth != null;
  *          allow update, delete: if request.auth.uid == resource.data.ownerId || request.auth.uid == resource.data.renterId;
  *        }
+ *        match /deletion_requests/{document=**} {
+ *          // Public write so mobile app users who uninstalled can request deletion per Apple/Google Play policy
+ *          allow create: if true;
+ *          allow read, update, delete: if request.auth != null;
+ *        }
+ *        match /mail/{document=**} {
+ *          // Writeable by system / client to trigger emails via Firebase Trigger Email extension
+ *          allow create: if true;
+ *          allow read, update, delete: if request.auth != null;
+ *        }
+ *        match /messages/{document=**} {
+ *          allow read, write: if request.auth != null;
+ *        }
+ *        match /payments/{document=**} {
+ *          allow read, write: if request.auth != null;
+ *        }
  *      }
  *    }
  *
- * DATABASE COLLECTIONS TO CREATE MANUALLY:
- * 1. users collection - stores user profile data
- * 2. properties collection - stores property information
- * 3. rentals collection - stores rental transactions
+ * DATABASE COLLECTIONS:
+ * 1. users - stores user profile data
+ * 2. properties - stores property information
+ * 3. rentals / renters - stores rental agreements and transactions
+ * 4. deletion_requests - stores Google Play & App Store user deletion requests
+ * 5. mail - queues email notifications (Trigger Email from Firestore extension)
+ * 6. messages - stores user communications
+ * 7. payments - stores payment and transaction records
  */

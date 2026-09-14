@@ -1,0 +1,339 @@
+<div class="py-5 bg-light min-vh-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-xl-8">
+
+        <!-- Header / Hero -->
+        <div class="text-center mb-4">
+          <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-danger-subtle text-danger fw-semibold small mb-2 border border-danger-subtle">
+            <i class="bi bi-shield-x"></i>
+            <span>Google Play & Apple App Store Data Safety Compliance</span>
+          </div>
+          <h1 class="h2 fw-bold text-dark mt-2 mb-2">Request Account & Data Deletion</h1>
+          <p class="text-secondary lead fs-6 mb-0">
+            Submit a request to permanently delete your Krenter user account and associated personal data.
+          </p>
+        </div>
+
+        <!-- Success Confirmation View -->
+        @if (isSubmitted) {
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 mb-4 text-center">
+          <div class="mb-3">
+            <div class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle" style="width: 72px; height: 72px;">
+              <i class="bi bi-check-circle-fill fs-1"></i>
+            </div>
+          </div>
+          <h2 class="h3 fw-bold text-dark mb-2">Deletion Request Received</h2>
+          <p class="text-secondary mb-4">
+            Your request to delete data for <strong class="text-dark">{{ submittedEmail }}</strong> has been securely logged in our system. A notification has been dispatched to the Krenter administrative team at <strong>krenterservices&#64;gmail.com</strong> to take action.
+          </p>
+
+          <div class="card bg-light border p-3 rounded-3 mb-4 text-start">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="small text-secondary fw-semibold">Request Reference ID:</span>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary py-0 px-2 rounded-pill small"
+                (click)="copyRequestId()"
+              >
+                <i class="bi" [class.bi-check-lg]="copied" [class.bi-clipboard]="!copied"></i>
+                <span class="ms-1">{{ copied ? 'Copied!' : 'Copy ID' }}</span>
+              </button>
+            </div>
+            <div class="font-monospace fw-bold text-dark fs-5 mb-2">{{ requestId }}</div>
+            <div class="row g-2 small border-top pt-2">
+              <div class="col-sm-4 text-secondary">Target Account:</div>
+              <div class="col-sm-8 text-dark fw-semibold">{{ submittedEmail }}</div>
+              <div class="col-sm-4 text-secondary">Target Resolution:</div>
+              <div class="col-sm-8 text-dark">Within 30 calendar days (per Apple & Google policies)</div>
+            </div>
+          </div>
+
+          <div class="alert alert-info border-0 rounded-3 text-start small mb-4">
+            <div class="d-flex gap-2">
+              <i class="bi bi-info-circle-fill fs-5 flex-shrink-0 text-primary"></i>
+              <div>
+                <strong>What happens next?</strong><br>
+                Our privacy team will verify ownership of the registered account and permanently purge your credentials, properties, rental agreements, payment histories, and messages. You will receive an automated confirmation email once complete.
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a routerLink="/" class="btn btn-primary px-4 rounded-pill">
+              Return to Home
+            </a>
+            <a [href]="getMailtoUrl()" class="btn btn-outline-danger px-4 rounded-pill">
+              <i class="bi bi-envelope-fill me-1"></i>Email Copy to Support
+            </a>
+            <button type="button" class="btn btn-link text-decoration-none text-muted small" (click)="resetForm()">
+              Submit Another Request
+            </button>
+          </div>
+        </div>
+        } @else {
+
+        <!-- Transparency & Disclosure Card (Per Google/Apple Store Policies) -->
+        <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+          <h2 class="h5 fw-bold text-dark mb-3 d-flex align-items-center gap-2">
+            <i class="bi bi-file-earmark-lock text-primary"></i>
+            Krenter Data Deletion Policy & Scope
+          </h2>
+          <p class="small text-secondary mb-3">
+            In compliance with <strong>Google Play Data Safety</strong> and <strong>Apple App Store Guideline 5.1.1(v)</strong>, Krenter enables users to request full account deletion and erasure of their personal information without needing to reinstall or access the mobile app.
+          </p>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-danger-subtle border border-danger-subtle h-100">
+                <h3 class="h6 fw-bold text-danger mb-2 d-flex align-items-center gap-1">
+                  <i class="bi bi-trash3-fill"></i> What Data Will Be Deleted
+                </h3>
+                <ul class="small text-dark ps-3 mb-0">
+                  <li class="mb-1"><strong>Account Profile:</strong> Full name, registered email, phone number, address, profile photo.</li>
+                  <li class="mb-1"><strong>Property Listings:</strong> All listings created or managed by your account.</li>
+                  <li class="mb-1"><strong>Rental Records:</strong> Active and previous tenant records, landlord agreements.</li>
+                  <li class="mb-1"><strong>Payments:</strong> Payment records and transaction logs tied to your user ID.</li>
+                  <li class="mb-1"><strong>Messages:</strong> In-app chats and correspondence where your email is sender or recipient.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-warning-subtle border border-warning-subtle h-100">
+                <h3 class="h6 fw-bold text-warning-emphasis mb-2 d-flex align-items-center gap-1">
+                  <i class="bi bi-shield-check"></i> Retention & Legal Exceptions
+                </h3>
+                <ul class="small text-dark ps-3 mb-0">
+                  <li class="mb-1"><strong>Statutory Tax Records:</strong> Legally mandated lease receipts or accounting records may be preserved in encrypted archives for up to 7 years strictly to satisfy state and federal tax audits.</li>
+                  <li class="mb-1"><strong>Fraud & Dispute Prevention:</strong> Records tied to ongoing disputes or unresolved security incidents.</li>
+                  <li class="mb-1"><strong>Zero Profiling:</strong> Retained records are never used for marketing, advertising, or profiling.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center gap-2 small text-muted">
+            <i class="bi bi-clock-history text-secondary"></i>
+            <span><strong>Processing SLA:</strong> Requests are acknowledged immediately and permanently executed within <strong>30 calendar days</strong>.</span>
+          </div>
+        </div>
+
+        <!-- Deletion Request Form -->
+        <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 mb-4">
+          <h2 class="h5 fw-bold text-dark mb-1">Submit Deletion Request</h2>
+          <p class="small text-secondary mb-4">
+            Please fill in the details associated with your Krenter account. All fields marked with <span class="text-danger">*</span> are required.
+          </p>
+
+          @if (submissionError) {
+          <div class="alert alert-danger alert-dismissible fade show rounded-3 small mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ submissionError }}
+            <button type="button" class="btn-close" (click)="submissionError = ''" aria-label="Close"></button>
+          </div>
+          }
+
+          <form [formGroup]="deletionForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Registered Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label fw-semibold small text-dark">
+                Registered Email Address <span class="text-danger">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                class="form-control form-control-lg fs-6"
+                placeholder="e.g. user@example.com"
+                formControlName="email"
+                [class.is-invalid]="deletionForm.get('email')?.invalid && deletionForm.get('email')?.touched"
+              />
+              @if (deletionForm.get('email')?.invalid && deletionForm.get('email')?.touched) {
+              <div class="invalid-feedback small">
+                Please provide a valid email address matching your registered Krenter account.
+              </div>
+              }
+              <div class="form-text small">
+                Must be the email address used to sign in to the Krenter app or website.
+              </div>
+            </div>
+
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label for="name" class="form-label fw-semibold small text-dark">
+                Full Name <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                class="form-control form-control-lg fs-6"
+                placeholder="e.g. John Doe"
+                formControlName="name"
+                [class.is-invalid]="deletionForm.get('name')?.invalid && deletionForm.get('name')?.touched"
+              />
+              @if (deletionForm.get('name')?.invalid && deletionForm.get('name')?.touched) {
+              <div class="invalid-feedback small">
+                Please enter your full name (at least 2 characters).
+              </div>
+              }
+            </div>
+
+            <!-- Phone Number (Optional) -->
+            <div class="mb-3">
+              <label for="phone" class="form-label fw-semibold small text-dark">
+                Registered Phone Number <span class="text-muted">(Optional)</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                class="form-control form-control-lg fs-6"
+                placeholder="e.g. +1 555-123-4567"
+                formControlName="phone"
+              />
+              <div class="form-text small">
+                Helpful if your account or rental agreements were created with a phone number.
+              </div>
+            </div>
+
+            <!-- Role in Krenter -->
+            <div class="mb-3">
+              <label for="role" class="form-label fw-semibold small text-dark">
+                Account Type / Primary Role <span class="text-danger">*</span>
+              </label>
+              <select id="role" class="form-select form-select-lg fs-6" formControlName="role">
+                <option value="renter">Tenant / Renter</option>
+                <option value="owner">Independent Landlord / Property Owner</option>
+                <option value="manager">Property Manager</option>
+                <option value="both">Both Landlord & Renter</option>
+                <option value="other">Other / Guest</option>
+              </select>
+            </div>
+
+            <!-- Deletion Scope -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold small text-dark d-block mb-2">
+                Deletion Scope <span class="text-danger">*</span>
+              </label>
+              <div class="form-check p-3 rounded-3 border mb-2" [class.border-danger]="!isSpecificScope" [class.bg-danger-subtle]="!isSpecificScope">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="scopeAll"
+                  value="all"
+                  formControlName="scope"
+                />
+                <label class="form-check-label fw-semibold text-dark ms-1" for="scopeAll">
+                  Delete Entire Account & All Associated Data (Recommended)
+                </label>
+                <div class="small text-secondary ps-4 pt-1">
+                  Permanently erases user credentials, listings, rental records, payment logs, and messages.
+                </div>
+              </div>
+
+              <div class="form-check p-3 rounded-3 border" [class.border-primary]="isSpecificScope" [class.bg-primary-subtle]="isSpecificScope">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  id="scopeSpecific"
+                  value="specific"
+                  formControlName="scope"
+                />
+                <label class="form-check-label fw-semibold text-dark ms-1" for="scopeSpecific">
+                  Delete Specific Data Only (Keep active account login)
+                </label>
+                <div class="small text-secondary ps-4 pt-1">
+                  Allows you to retain your login while deleting specific listings, messages, or documents.
+                </div>
+              </div>
+            </div>
+
+            <!-- Specific Data Details (conditional) -->
+            @if (isSpecificScope) {
+            <div class="mb-4">
+              <label for="specificDataDetails" class="form-label fw-semibold small text-dark">
+                Specify Which Data to Delete <span class="text-danger">*</span>
+              </label>
+              <textarea
+                id="specificDataDetails"
+                rows="3"
+                class="form-control"
+                placeholder="Please describe which property listings, messages, or documents you want removed..."
+                formControlName="specificDataDetails"
+                [class.is-invalid]="deletionForm.get('specificDataDetails')?.invalid && deletionForm.get('specificDataDetails')?.touched"
+              ></textarea>
+              @if (deletionForm.get('specificDataDetails')?.invalid && deletionForm.get('specificDataDetails')?.touched) {
+              <div class="invalid-feedback small">
+                Please provide details on what data you want deleted (at least 5 characters).
+              </div>
+              }
+            </div>
+            }
+
+            <!-- Reason (Optional) -->
+            <div class="mb-4">
+              <label for="reason" class="form-label fw-semibold small text-dark">
+                Reason for Leaving <span class="text-muted">(Optional)</span>
+              </label>
+              <select id="reason" class="form-select fs-6 mb-2" formControlName="reason">
+                <option value="">Select a reason (optional)...</option>
+                <option value="No longer renting or managing properties">No longer renting or managing properties</option>
+                <option value="Privacy or data concerns">Privacy or data concerns</option>
+                <option value="Switching to another platform">Switching to another platform</option>
+                <option value="App performance or usability issues">App performance or usability issues</option>
+                <option value="Created duplicate account">Created duplicate account</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Irreversible Confirmation Checkbox -->
+            <div class="mb-4 p-3 rounded-3 bg-light border">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="confirmAcknowledge"
+                  formControlName="confirmAcknowledge"
+                  [class.is-invalid]="deletionForm.get('confirmAcknowledge')?.invalid && deletionForm.get('confirmAcknowledge')?.touched"
+                />
+                <label class="form-check-label small fw-semibold text-dark" for="confirmAcknowledge">
+                  I understand that this action is irreversible. Once processed, my account, properties, tenant history, payment records, and messages cannot be recovered. <span class="text-danger">*</span>
+                </label>
+                @if (deletionForm.get('confirmAcknowledge')?.invalid && deletionForm.get('confirmAcknowledge')?.touched) {
+                <div class="invalid-feedback small d-block">
+                  You must confirm your acknowledgment to submit the deletion request.
+                </div>
+                }
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-danger btn-lg fs-6 fw-semibold rounded-pill py-3 shadow-sm d-flex align-items-center justify-content-center gap-2"
+                [disabled]="isSubmitting"
+              >
+                @if (isSubmitting) {
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span>Submitting Request to Krenter...</span>
+                } @else {
+                <i class="bi bi-trash3-fill"></i>
+                <span>Submit Account & Data Deletion Request</span>
+                }
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Direct Email Support Alternative -->
+        <div class="text-center text-secondary small">
+          Prefer to request deletion via email? Contact our Data Protection Officer directly at
+          <a href="mailto:krenterservices@gmail.com?subject=Krenter%20Account%20and%20Data%20Deletion%20Request" class="text-danger fw-semibold text-decoration-none">
+            krenterservices&#64;gmail.com
+          </a>.
+        </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</div>
