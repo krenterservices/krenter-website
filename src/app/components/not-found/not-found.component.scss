@@ -1,0 +1,50 @@
+$primary-color: #ef8124;
+$primary-hover: #d96f16;
+
+.not-found-page {
+  min-height: 70vh;
+}
+
+.min-vh-70 {
+  min-height: 70vh;
+}
+
+.max-w-450 {
+  max-width: 450px;
+}
+
+.error-badge-wrapper {
+  width: 90px;
+  height: 90px;
+}
+
+.error-code {
+  font-size: 2.5rem;
+  line-height: 1;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.text-primary {
+  color: $primary-color !important;
+}
+
+.bg-primary-subtle {
+  background-color: rgba(239, 129, 36, 0.12) !important;
+}
+
+.not-found-card {
+  border-top: 4px solid $primary-color !important;
+}
+
+.btn-primary {
+  background-color: $primary-color !important;
+  border-color: $primary-color !important;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $primary-hover !important;
+    border-color: $primary-hover !important;
+    transform: translateY(-1px);
+  }
+}

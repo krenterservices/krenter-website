@@ -6,6 +6,13 @@ import { AuthService } from '../../services/auth.service';
 import { SeoService } from '../../services/seo.service';
 import { Subscription } from 'rxjs';
 
+function atLeastOneRoleValidator(group: FormGroup) {
+  const isOwner = group.get('isOwner')?.value;
+  const isRenter = group.get('isRenter')?.value;
+  const isManager = group.get('isManager')?.value;
+  return isOwner || isRenter || isManager ? null : { noRoleSelected: true };
+}
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -21,24 +28,30 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private loadingSubscription: Subscription | undefined;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['renter', Validators.required] // Default to renter
-    });
+    this.registerForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        phone: [''],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        isOwner: [false],
+        isRenter: [true],
+        isManager: [false]
+      },
+      { validators: atLeastOneRoleValidator }
+    );
   }
 
   ngOnInit(): void {
     this.seoService.setSeoData({
       title: 'Create an Account | Krenter Property Management',
       description:
-        'Join Krenter today. Sign up as a property owner or tenant to manage rentals, collect or pay rent online, and coordinate maintenance requests.',
+        'Join Krenter today. Sign up as a property owner, renter, or property manager to manage rentals, track properties, and coordinate leases.',
       robots: 'noindex, follow',
       canonicalUrl: 'https://krenter.org/register'
     });
 
-    // Subscribe to loading state
     this.loadingSubscription = this.authService.isLoading.subscribe(loading => {
       this.isLoading = loading;
     });
@@ -53,7 +66,24 @@ export class RegisterComponent implements OnInit, OnDestroy {
   async onSubmit() {
     if (this.registerForm.valid) {
       this.registerError = '';
-      const result = await this.authService.register(this.registerForm.value);
+      const formVal = this.registerForm.value;
+      const roles: ('owner' | 'renter' | 'manager')[] = [];
+      if (formVal.isOwner) roles.push('owner');
+      if (formVal.isRenter) roles.push('renter');
+      if (formVal.isManager) roles.push('manager');
+
+      const result = await this.authService.register({
+        firstName: formVal.firstName.trim(),
+        lastName: formVal.lastName.trim(),
+        name: `${formVal.firstName.trim()} ${formVal.lastName.trim()}`.trim(),
+        email: formVal.email.trim(),
+        phone: (formVal.phone || '').trim(),
+        password: formVal.password,
+        isOwner: formVal.isOwner,
+        isRenter: formVal.isRenter,
+        isManager: formVal.isManager,
+        roles
+      });
 
       if (!result.success) {
         this.registerError = result.error || 'Registration failed. Please try again.';
@@ -61,45 +91,37 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
   }
 
-  get nameError(): string {
-    const nameControl = this.registerForm.get('name');
-    if (nameControl?.touched && nameControl.hasError('required')) {
-      return 'Full name is required.';
-    }
-    return '';
+  get firstNameError(): string {
+    const c = this.registerForm.get('firstName');
+    return c?.touched && c.hasError('required') ? 'First name is required.' : '';
+  }
+
+  get lastNameError(): string {
+    const c = this.registerForm.get('lastName');
+    return c?.touched && c.hasError('required') ? 'Last name is required.' : '';
   }
 
   get emailError(): string {
-    const emailControl = this.registerForm.get('email');
-    if (emailControl?.touched) {
-      if (emailControl.hasError('required')) {
-        return 'Email is required.';
-      }
-      if (emailControl.hasError('email')) {
-        return 'Please enter a valid email.';
-      }
+    const c = this.registerForm.get('email');
+    if (c?.touched) {
+      if (c.hasError('required')) return 'Email is required.';
+      if (c.hasError('email')) return 'Please enter a valid email.';
     }
     return '';
   }
 
   get passwordError(): string {
-    const passwordControl = this.registerForm.get('password');
-    if (passwordControl?.touched) {
-      if (passwordControl.hasError('required')) {
-        return 'Password is required.';
-      }
-      if (passwordControl.hasError('minlength')) {
-        return 'Password must be at least 6 characters long.';
-      }
+    const c = this.registerForm.get('password');
+    if (c?.touched) {
+      if (c.hasError('required')) return 'Password is required.';
+      if (c.hasError('minlength')) return 'Password must be at least 6 characters long.';
     }
     return '';
   }
 
-  getRoleDescription(role: string): string {
-    if (role === 'owner') {
-      return 'I want to list and manage properties';
-    } else {
-      return 'I want to rent properties';
-    }
+  get roleError(): string {
+    return this.registerForm.touched && this.registerForm.hasError('noRoleSelected')
+      ? 'Please select at least one role (Owner, Renter, or Property Manager).'
+      : '';
   }
 }

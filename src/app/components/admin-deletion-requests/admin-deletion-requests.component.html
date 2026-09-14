@@ -1,0 +1,508 @@
+<div class="py-5 bg-light min-vh-100">
+  <div class="container-fluid px-lg-5">
+
+    <!-- Top Admin Bar -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+      <div>
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-dark text-white small fw-semibold mb-2">
+          <i class="bi bi-shield-lock-fill text-warning"></i>
+          <span>Administrator Control Panel</span>
+        </div>
+        <h1 class="h3 fw-bold text-dark mb-1">Account & Data Deletion Requests</h1>
+        <p class="text-secondary small mb-0">
+          Manage, verify, and execute user deletion requests per Apple App Store and Google Play compliance standards.
+        </p>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill d-inline-flex align-items-center gap-1" (click)="loadRequests()">
+          <i class="bi bi-arrow-clockwise"></i>
+          <span>Refresh</span>
+        </button>
+        <a routerLink="/delete-account" target="_blank" class="btn btn-outline-primary btn-sm rounded-pill d-inline-flex align-items-center gap-1">
+          <i class="bi bi-box-arrow-up-right"></i>
+          <span>View Public Request Page</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Admin Access Notice -->
+    @if (!isAdmin && currentUser) {
+    <div class="alert alert-warning border-0 rounded-4 shadow-sm mb-4">
+      <div class="d-flex gap-2 align-items-center">
+        <i class="bi bi-exclamation-triangle-fill fs-4 text-warning"></i>
+        <div>
+          <strong>Administrator Notice:</strong> You are signed in as <strong>{{ currentUser.email }}</strong>. Make sure your account has administrator privileges or is <strong>krenterservices&#64;gmail.com</strong> to perform sensitive operations.
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Success Feedback Banner -->
+    @if (executionSuccessMessage) {
+    <div class="alert alert-success alert-dismissible fade show rounded-4 shadow-sm mb-4" role="alert">
+      <div class="d-flex align-items-start gap-2">
+        <i class="bi bi-check-circle-fill fs-5 text-success flex-shrink-0 mt-0.5"></i>
+        <div>{{ executionSuccessMessage }}</div>
+      </div>
+      <button type="button" class="btn-close" (click)="executionSuccessMessage = ''" aria-label="Close"></button>
+    </div>
+    }
+
+    <!-- Error Banner -->
+    @if (executionError) {
+    <div class="alert alert-danger alert-dismissible fade show rounded-4 shadow-sm mb-4" role="alert">
+      <div class="d-flex align-items-start gap-2">
+        <i class="bi bi-x-circle-fill fs-5 text-danger flex-shrink-0 mt-0.5"></i>
+        <div>{{ executionError }}</div>
+      </div>
+      <button type="button" class="btn-close" (click)="executionError = ''" aria-label="Close"></button>
+    </div>
+    }
+
+    <!-- Stat Metric Cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <div class="text-secondary small fw-semibold">Total Requests</div>
+              <div class="h3 fw-bold text-dark mb-0">{{ requests.length }}</div>
+            </div>
+            <div class="p-3 bg-primary-subtle text-primary rounded-circle">
+              <i class="bi bi-inbox-fill fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <div class="text-secondary small fw-semibold">Pending Action</div>
+              <div class="h3 fw-bold text-warning mb-0">{{ pendingCount }}</div>
+            </div>
+            <div class="p-3 bg-warning-subtle text-warning rounded-circle">
+              <i class="bi bi-clock-fill fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <div class="text-secondary small fw-semibold">In Progress</div>
+              <div class="h3 fw-bold text-info mb-0">{{ inProgressCount }}</div>
+            </div>
+            <div class="p-3 bg-info-subtle text-info rounded-circle">
+              <i class="bi bi-hourglass-split fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 p-3 bg-white">
+          <div class="d-flex align-items-center justify-content-between">
+            <div>
+              <div class="text-secondary small fw-semibold">Completed</div>
+              <div class="h3 fw-bold text-success mb-0">{{ completedCount }}</div>
+            </div>
+            <div class="p-3 bg-success-subtle text-success rounded-circle">
+              <i class="bi bi-check2-circle fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter & Search Toolbar -->
+    <div class="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-6 col-lg-7">
+          <div class="btn-group flex-wrap" role="group" aria-label="Status filters">
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill me-1 mb-1"
+              [class.btn-dark]="statusFilter === 'all'"
+              [class.btn-outline-secondary]="statusFilter !== 'all'"
+              (click)="setStatusFilter('all')"
+            >
+              All ({{ requests.length }})
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill me-1 mb-1"
+              [class.btn-warning]="statusFilter === 'pending'"
+              [class.btn-outline-secondary]="statusFilter !== 'pending'"
+              (click)="setStatusFilter('pending')"
+            >
+              Pending ({{ pendingCount }})
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill me-1 mb-1"
+              [class.btn-info]="statusFilter === 'in_progress'"
+              [class.btn-outline-secondary]="statusFilter !== 'in_progress'"
+              (click)="setStatusFilter('in_progress')"
+            >
+              In Progress ({{ inProgressCount }})
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill me-1 mb-1"
+              [class.btn-success]="statusFilter === 'completed'"
+              [class.btn-outline-secondary]="statusFilter !== 'completed'"
+              (click)="setStatusFilter('completed')"
+            >
+              Completed ({{ completedCount }})
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm rounded-pill mb-1"
+              [class.btn-danger]="statusFilter === 'rejected'"
+              [class.btn-outline-secondary]="statusFilter !== 'rejected'"
+              (click)="setStatusFilter('rejected')"
+            >
+              Rejected
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-5">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text bg-light border-end-0">
+              <i class="bi bi-search text-muted"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control border-start-0"
+              placeholder="Search by email, name, phone, or request ID..."
+              [(ngModel)]="searchTerm"
+              (ngModelChange)="applyFilter()"
+            />
+            @if (searchTerm) {
+            <button class="btn btn-outline-secondary" type="button" (click)="searchTerm = ''; applyFilter()">
+              <i class="bi bi-x"></i>
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white mb-5">
+      @if (isLoading) {
+      <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading requests...</span>
+        </div>
+        <p class="text-secondary small mt-2 mb-0">Loading deletion requests from Firebase...</p>
+      </div>
+      } @else if (filteredRequests.length === 0) {
+      <div class="text-center py-5">
+        <div class="text-muted mb-2">
+          <i class="bi bi-inbox fs-1"></i>
+        </div>
+        <h5 class="fw-semibold text-dark">No Deletion Requests Found</h5>
+        <p class="text-secondary small mb-0">
+          @if (searchTerm || statusFilter !== 'all') {
+          Try adjusting your search query or status filter.
+          } @else {
+          There are currently no user account deletion requests logged in the system.
+          }
+        </p>
+      </div>
+      } @else {
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light small text-secondary">
+            <tr>
+              <th scope="col" class="ps-4">User Information</th>
+              <th scope="col">Role & Scope</th>
+              <th scope="col">Reason / Details</th>
+              <th scope="col">Date Requested</th>
+              <th scope="col">Status</th>
+              <th scope="col" class="text-end pe-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="small">
+            @for (req of filteredRequests; track req.id) {
+            <tr>
+              <!-- User Information -->
+              <td class="ps-4 py-3">
+                <div class="fw-bold text-dark">{{ req.name }}</div>
+                <div class="text-primary fw-semibold">{{ req.email }}</div>
+                @if (req.phone) {
+                <div class="text-muted small">
+                  <i class="bi bi-telephone me-1"></i>{{ req.phone }}
+                </div>
+                }
+                <div class="text-secondary font-monospace" style="font-size: 11px;">
+                  ID: {{ req.id }}
+                </div>
+              </td>
+
+              <!-- Role & Scope -->
+              <td>
+                <div class="mb-1">
+                  <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill">
+                    {{ req.role | titlecase }}
+                  </span>
+                </div>
+                <div>
+                  @if (req.scope === 'all') {
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill">
+                    Full Account & Data
+                  </span>
+                  } @else {
+                  <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill">
+                    Specific Data Only
+                  </span>
+                  }
+                </div>
+              </td>
+
+              <!-- Reason / Details -->
+              <td style="max-width: 250px;">
+                @if (req.reason) {
+                <div class="text-dark">{{ req.reason }}</div>
+                }
+                @if (req.specificDataDetails) {
+                <div class="text-muted small fst-italic mt-1">
+                  "{{ req.specificDataDetails }}"
+                </div>
+                }
+                @if (!req.reason && !req.specificDataDetails) {
+                <span class="text-muted">None provided</span>
+                }
+                @if (req.deletedCounts) {
+                <div class="mt-1 text-success small">
+                  <i class="bi bi-check-circle me-1"></i>Purged: {{ req.deletedCounts.users }} user, {{ req.deletedCounts.properties }} props, {{ req.deletedCounts.renters + req.deletedCounts.rentals }} rentals, {{ req.deletedCounts.payments }} payments, {{ req.deletedCounts.messages }} msgs
+                </div>
+                }
+              </td>
+
+              <!-- Date Requested -->
+              <td class="text-nowrap">
+                <div class="text-dark">{{ req.createdAt | date:'mediumDate' }}</div>
+                <div class="text-muted small">{{ req.createdAt | date:'shortTime' }}</div>
+                @if (req.processedAt) {
+                <div class="text-success small" style="font-size: 11px;">
+                  Processed: {{ req.processedAt | date:'shortDate' }}
+                </div>
+                }
+              </td>
+
+              <!-- Status Badge -->
+              <td>
+                @switch (req.status) {
+                  @case ('pending') {
+                  <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle rounded-pill px-2 py-1">
+                    <i class="bi bi-clock-fill me-1"></i>Pending
+                  </span>
+                  }
+                  @case ('in_progress') {
+                  <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle rounded-pill px-2 py-1">
+                    <i class="bi bi-arrow-repeat me-1"></i>In Progress
+                  </span>
+                  }
+                  @case ('completed') {
+                  <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-2 py-1">
+                    <i class="bi bi-check2-circle me-1"></i>Completed
+                  </span>
+                  }
+                  @case ('rejected') {
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle rounded-pill px-2 py-1">
+                    <i class="bi bi-x-circle-fill me-1"></i>Rejected
+                  </span>
+                  }
+                }
+              </td>
+
+              <!-- Actions -->
+              <td class="text-end pe-4 text-nowrap">
+                <div class="d-inline-flex align-items-center gap-1">
+                  <!-- Delete Action Button -->
+                  @if (req.status !== 'completed') {
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm rounded-pill px-2.5 py-1 d-inline-flex align-items-center gap-1 shadow-sm"
+                    (click)="openDeleteModal(req)"
+                    title="Permanently delete user account and associated records"
+                  >
+                    <i class="bi bi-trash3-fill"></i>
+                    <span>Delete Data & Account</span>
+                  </button>
+                  } @else {
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm rounded-pill px-2.5 py-1 d-inline-flex align-items-center gap-1"
+                    (click)="openDeleteModal(req)"
+                    title="Re-run purge or inspect deletion details"
+                  >
+                    <i class="bi bi-arrow-repeat"></i>
+                    <span>Re-Purge</span>
+                  </button>
+                  }
+
+                  <!-- Status Select Dropdown -->
+                  <div class="dropdown d-inline-block">
+                    <button
+                      class="btn btn-outline-secondary btn-sm rounded-circle p-1"
+                      style="width: 30px; height: 30px;"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      title="Update status"
+                    >
+                      <i class="bi bi-three-dots-vertical"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm small">
+                      <li><h6 class="dropdown-header">Change Status</h6></li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="updateStatus(req, 'pending')">
+                          <i class="bi bi-clock me-1 text-warning"></i>Mark Pending
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="updateStatus(req, 'in_progress')">
+                          <i class="bi bi-hourglass me-1 text-info"></i>Mark In Progress
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="updateStatus(req, 'completed')">
+                          <i class="bi bi-check2-circle me-1 text-success"></i>Mark Completed
+                        </button>
+                      </li>
+                      <li>
+                        <button class="dropdown-item" type="button" (click)="updateStatus(req, 'rejected')">
+                          <i class="bi bi-x-circle me-1 text-danger"></i>Mark Rejected
+                        </button>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          [href]="'mailto:' + req.email + '?subject=Krenter%20Account%20Deletion%20Request%20' + req.id"
+                        >
+                          <i class="bi bi-envelope me-1"></i>Email User
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+    </div>
+
+  </div>
+</div>
+
+<!-- Permanent Deletion Confirmation Modal -->
+@if (selectedRequestForDeletion) {
+<div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.6);" role="dialog" aria-modal="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+      <!-- Modal Header -->
+      <div class="modal-header bg-danger text-white py-3">
+        <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          Confirm Permanent User & Data Deletion
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          (click)="closeDeleteModal()"
+          [disabled]="isExecutingDeletion"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body p-4">
+        <div class="alert alert-danger-subtle border border-danger-subtle rounded-3 small mb-4">
+          <p class="fw-bold mb-1">
+            <i class="bi bi-shield-slash-fill me-1"></i>Warning: This operation is permanent and irreversible!
+          </p>
+          <p class="mb-0">
+            Clicking <strong>"Confirm Permanent Deletion"</strong> will scrub all matching records for user <strong>{{ selectedRequestForDeletion.email }}</strong> from the Firebase Firestore database.
+          </p>
+        </div>
+
+        <!-- User Summary -->
+        <div class="card bg-light border-0 rounded-3 p-3 mb-4">
+          <div class="row g-2 small">
+            <div class="col-sm-4 text-secondary">Target User Name:</div>
+            <div class="col-sm-8 fw-bold text-dark">{{ selectedRequestForDeletion.name }}</div>
+            <div class="col-sm-4 text-secondary">Target Email:</div>
+            <div class="col-sm-8 fw-bold text-primary">{{ selectedRequestForDeletion.email }}</div>
+            <div class="col-sm-4 text-secondary">Registered Phone:</div>
+            <div class="col-sm-8 text-dark">{{ selectedRequestForDeletion.phone || 'N/A' }}</div>
+            <div class="col-sm-4 text-secondary">Requested Scope:</div>
+            <div class="col-sm-8 text-dark">
+              {{ selectedRequestForDeletion.scope === 'all' ? 'All Account Data' : 'Specific Data Only' }}
+            </div>
+            @if (selectedRequestForDeletion.reason) {
+            <div class="col-sm-4 text-secondary">Reason:</div>
+            <div class="col-sm-8 text-dark">{{ selectedRequestForDeletion.reason }}</div>
+            }
+          </div>
+        </div>
+
+        <h6 class="fw-bold text-dark mb-2">Automated Purge Actions to be Executed:</h6>
+        <ul class="small text-secondary mb-3 ps-3">
+          <li class="mb-1"><strong>Users Profile:</strong> Deletes <code>users/&#123;uid&#125;</code> doc matching this email.</li>
+          <li class="mb-1"><strong>Properties:</strong> Deletes or cleans property listings where user is <code>ownerId</code> or <code>ownerEmailId</code>.</li>
+          <li class="mb-1"><strong>Renters & Rentals:</strong> Deletes records where user is <code>ownerEmailId</code>, <code>renterEmailId</code>, <code>renterId</code>, or <code>ownerId</code>.</li>
+          <li class="mb-1"><strong>Payments:</strong> Deletes payment transaction records where user ID or email is present in the payment record.</li>
+          <li class="mb-1"><strong>Messages:</strong> Deletes in-app messages and conversations where sender or recipient email ID matches this user.</li>
+          <li class="mb-1"><strong>Email Notification:</strong> Dispatches a completion notice to <code>{{ selectedRequestForDeletion.email }}</code> via Firebase Trigger Email.</li>
+          <li class="mb-1"><strong>Status:</strong> Marks this deletion request record as <code>completed</code>.</li>
+        </ul>
+
+        @if (executionError) {
+        <div class="alert alert-danger rounded-3 small mb-0">
+          <i class="bi bi-x-circle-fill me-1"></i>{{ executionError }}
+        </div>
+        }
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer bg-light py-3">
+        <button
+          type="button"
+          class="btn btn-outline-secondary rounded-pill px-4"
+          (click)="closeDeleteModal()"
+          [disabled]="isExecutingDeletion"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger rounded-pill px-4 d-inline-flex align-items-center gap-2"
+          (click)="confirmExecuteDeletion()"
+          [disabled]="isExecutingDeletion"
+        >
+          @if (isExecutingDeletion) {
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span>Purging User Data in Firebase...</span>
+          } @else {
+          <i class="bi bi-trash3-fill"></i>
+          <span>Confirm Permanent Deletion</span>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}

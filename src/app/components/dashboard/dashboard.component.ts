@@ -38,7 +38,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.authSubscription = this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
       if (user) {
-        void this.loadDashboard(user.uid);
+        void this.loadDashboard(user);
+      } else {
+        this.isLoading = false;
       }
     });
   }
@@ -47,23 +49,63 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.authSubscription?.unsubscribe();
   }
 
-  async loadDashboard(userId: string): Promise<void> {
+  async loadDashboard(target?: KrenterUser | string): Promise<void> {
     this.isLoading = true;
     this.errorMessage = '';
 
+    const user = typeof target === 'object' && target !== null 
+      ? target 
+      : this.currentUser;
+
+    if (!user) {
+      this.isLoading = false;
+      return;
+    }
+
     try {
-      const [ownedProperties, rentals] = await Promise.all([
-        this.propertyService.getPropertiesByOwner(userId),
-        this.propertyService.getRentalsByRenter(userId)
+      const [ownerProps, managerProps, canonicalRenters, legacyRentals, renterProps] = await Promise.all([
+        this.propertyService.getPropertiesByOwner(user.uid, user.email),
+        user.email ? this.propertyService.getPropertiesByManagerEmail(user.email, user.phone) : Promise.resolve([]),
+        user.email ? this.propertyService.getRentersByRenterEmail(user.email, user.phone) : Promise.resolve([]),
+        this.propertyService.getRentalsByRenter(user.uid),
+        user.email ? this.propertyService.getPropertiesByRenterEmail(user.email, user.phone) : Promise.resolve([])
       ]);
 
-      this.ownedProperties = ownedProperties;
-      this.rentedProperties = await Promise.all(
-        rentals.map(async rental => ({
-          ...rental,
-          property: await this.propertyService.getProperty(rental.propertyId) || undefined
-        }))
-      );
+      // Deduplicate owned / managed properties
+      const propMap = new Map<string, Property>();
+      for (const p of [...ownerProps, ...managerProps]) {
+        if (p.id) propMap.set(p.id, p);
+      }
+      this.ownedProperties = Array.from(propMap.values());
+
+      // Deduplicate rentals
+      const rentalMap = new Map<string, RentalWithProperty>();
+      for (const r of [...canonicalRenters, ...legacyRentals]) {
+        const prop = r.propertyId ? await this.propertyService.getProperty(r.propertyId) : null;
+        rentalMap.set(r.id || r.propertyId, {
+          ...r,
+          property: prop || undefined
+        });
+      }
+
+      for (const prop of renterProps) {
+        if (prop.id && !rentalMap.has(prop.id)) {
+          rentalMap.set(prop.id, {
+            id: prop.id,
+            propertyId: prop.id,
+            ownerId: prop.ownerId || '',
+            ownerEmailId: prop.ownerEmailId || '',
+            renterId: user.uid,
+            renterEmailId: prop.renterEmailId || user.email || '',
+            rentalPrice: prop.price,
+            startDate: prop.createdAt || new Date(),
+            status: 'active',
+            property: prop
+          });
+        }
+      }
+
+      this.rentedProperties = Array.from(rentalMap.values());
     } catch (error) {
       console.error('Error loading dashboard:', error);
       this.errorMessage = 'We could not load your dashboard. Please try again.';

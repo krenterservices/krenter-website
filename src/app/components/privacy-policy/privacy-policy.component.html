@@ -407,16 +407,19 @@
               </div>
 
               <div class="bg-white p-3 rounded-3 border border-danger-subtle mb-3">
-                <h6 class="fw-bold text-dark mb-2">Option 2: Web & Email Deletion Request</h6>
+                <h6 class="fw-bold text-dark mb-2">Option 2: Direct Web Deletion Request (Recommended for App Store & Google Play)</h6>
                 <p class="small text-secondary mb-2">
-                  If you cannot access the mobile application, or wish to submit a manual deletion request, email our Data Privacy Officer directly:
+                  Users who no longer have the Krenter app installed or who prefer to request deletion online can submit an official request directly through our compliance portal:
                 </p>
-                <div class="d-flex flex-wrap gap-2 align-items-center">
-                  <a href="mailto:support@krenter.app?subject=Krenter%20Account%20and%20Data%20Deletion%20Request" class="btn btn-danger btn-sm">
-                    <i class="bi bi-envelope-fill me-1"></i>Email support@krenter.app
+                <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+                  <a routerLink="/delete-account" class="btn btn-danger btn-sm rounded-pill px-3">
+                    <i class="bi bi-shield-x me-1"></i>Open Account & Data Deletion Request Page
                   </a>
-                  <span class="small text-muted">Subject: "Krenter Account and Data Deletion Request"</span>
+                  <a href="mailto:krenterservices@gmail.com?subject=Krenter%20Account%20and%20Data%20Deletion%20Request" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                    <i class="bi bi-envelope-fill me-1"></i>Email krenterservices@gmail.com
+                  </a>
                 </div>
+                <span class="small text-muted">Web requests are securely logged in Firebase and acknowledged immediately.</span>
               </div>
 
               <h6 class="fw-bold text-dark mb-1">What Happens When You Delete Your Account:</h6>

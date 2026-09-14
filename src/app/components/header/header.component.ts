@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject } from '@angula
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { AuthService, KrenterUser } from '../../services/auth.service';
+import { AuthService, KrenterUser, isUserOwner, isUserRenter, isUserManager, isUserAdmin } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +32,32 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  get isOwner(): boolean {
+    return isUserOwner(this.currentUser);
+  }
+
+  get isRenter(): boolean {
+    return isUserRenter(this.currentUser);
+  }
+
+  get isManager(): boolean {
+    return isUserManager(this.currentUser);
+  }
+
+  get isAdmin(): boolean {
+    return isUserAdmin(this.currentUser);
+  }
+
+  get roleBadgeText(): string {
+    if (!this.currentUser) return '';
+    const roles: string[] = [];
+    if (this.isAdmin) roles.push('ADMIN');
+    if (this.isOwner) roles.push('OWNER');
+    if (this.isRenter) roles.push('RENTER');
+    if (this.isManager) roles.push('MANAGER');
+    return roles.length > 0 ? roles.join(' / ') : (this.currentUser.role || 'USER').toUpperCase();
+  }
+
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
     this.cdr.markForCheck();
@@ -59,3 +85,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cdr.markForCheck();
   }
 }
+

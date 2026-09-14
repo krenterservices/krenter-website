@@ -1,74 +1,216 @@
-<div class="register-container">
-  <h2>Create Your Krenter Account</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    @if (registerError) {
-    <div class="error-message">
-      {{ registerError }}
-    </div>
-    }
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-7">
+      <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold mb-2">Create Your Krenter Account</h2>
+          <p class="text-muted">Sign up to access rental properties, list your real estate, or manage portfolios.</p>
+        </div>
 
-    <div class="form-group">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" formControlName="name" [disabled]="isLoading">
-      @if (nameError) {
-      <div class="error">
-        {{ nameError }}
+        @if (registerError) {
+          <div class="alert alert-danger d-flex align-items-center mb-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <div>{{ registerError }}</div>
+          </div>
+        }
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Name Row -->
+          <div class="row g-3 mb-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="firstName"
+                formControlName="firstName"
+                placeholder="John"
+                [class.is-invalid]="firstNameError"
+                [disabled]="isLoading"
+              />
+              @if (firstNameError) {
+                <div class="invalid-feedback">{{ firstNameError }}</div>
+              }
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                id="lastName"
+                formControlName="lastName"
+                placeholder="Doe"
+                [class.is-invalid]="lastNameError"
+                [disabled]="isLoading"
+              />
+              @if (lastNameError) {
+                <div class="invalid-feedback">{{ lastNameError }}</div>
+              }
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+            <input
+              type="email"
+              class="form-control form-control-lg"
+              id="email"
+              formControlName="email"
+              placeholder="name@example.com"
+              [class.is-invalid]="emailError"
+              [disabled]="isLoading"
+            />
+            @if (emailError) {
+              <div class="invalid-feedback">{{ emailError }}</div>
+            }
+          </div>
+
+          <!-- Phone Number -->
+          <div class="mb-3">
+            <label for="phone" class="form-label fw-semibold">Phone Number</label>
+            <input
+              type="tel"
+              class="form-control form-control-lg"
+              id="phone"
+              formControlName="phone"
+              placeholder="+1 (555) 000-0000"
+              [disabled]="isLoading"
+            />
+            <div class="form-text">Used for rental inquiries and property manager assignment.</div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label for="password" class="form-label fw-semibold">Password <span class="text-danger">*</span></label>
+            <input
+              type="password"
+              class="form-control form-control-lg"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              [class.is-invalid]="passwordError"
+              [disabled]="isLoading"
+            />
+            @if (passwordError) {
+              <div class="invalid-feedback">{{ passwordError }}</div>
+            }
+            <div class="form-text">Minimum 6 characters.</div>
+          </div>
+
+          <!-- Role Selection (Checkboxes) -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold d-block mb-1">
+              I am joining Krenter as: <span class="text-muted fw-normal">(Select all that apply)</span>
+            </label>
+            <p class="text-muted small mb-3">
+              You can both own properties and rent in other locations, or manage properties for others.
+            </p>
+
+            @if (roleError) {
+              <div class="alert alert-warning py-2 px-3 small mb-3">{{ roleError }}</div>
+            }
+
+            <div class="row g-3">
+              <!-- Property Owner Checkbox Card -->
+              <div class="col-12">
+                <div class="role-card border rounded-3 p-3" [class.role-card-active]="registerForm.get('isOwner')?.value">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="isOwner"
+                      formControlName="isOwner"
+                      [disabled]="isLoading"
+                    />
+                    <label class="form-check-label d-block ms-2 cursor-pointer" for="isOwner">
+                      <span class="d-flex align-items-center fw-bold">
+                        <i class="bi bi-house-door-fill text-primary me-2 fs-5"></i>
+                        Property Owner
+                      </span>
+                      <span class="text-muted small d-block mt-1">
+                        I own properties and want to list them, track rentals, and onboard properties.
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Renter / Tenant Checkbox Card -->
+              <div class="col-12">
+                <div class="role-card border rounded-3 p-3" [class.role-card-active]="registerForm.get('isRenter')?.value">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="isRenter"
+                      formControlName="isRenter"
+                      [disabled]="isLoading"
+                    />
+                    <label class="form-check-label d-block ms-2 cursor-pointer" for="isRenter">
+                      <span class="d-flex align-items-center fw-bold">
+                        <i class="bi bi-key-fill text-success me-2 fs-5"></i>
+                        Renter / Tenant
+                      </span>
+                      <span class="text-muted small d-block mt-1">
+                        I want to browse available rentals or access properties rented under my email or phone.
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Property Manager Checkbox Card -->
+              <div class="col-12">
+                <div class="role-card border rounded-3 p-3" [class.role-card-active]="registerForm.get('isManager')?.value">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="isManager"
+                      formControlName="isManager"
+                      [disabled]="isLoading"
+                    />
+                    <label class="form-check-label d-block ms-2 cursor-pointer" for="isManager">
+                      <span class="d-flex align-items-center fw-bold">
+                        <i class="bi bi-person-gear text-info me-2 fs-5"></i>
+                        Property Manager
+                      </span>
+                      <span class="text-muted small d-block mt-1">
+                        I oversee and manage properties delegated to my email or phone number.
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid mt-4">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg fw-bold shadow-sm"
+              [disabled]="registerForm.invalid || isLoading"
+            >
+              @if (!isLoading) {
+                <span>Create Account</span>
+              } @else {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>Creating Account...</span>
+              }
+            </button>
+          </div>
+        </form>
+
+        <div class="text-center mt-4 pt-2 border-top">
+          <p class="text-muted mb-0">
+            Already have an account?
+            <a routerLink="/login" class="text-primary fw-semibold text-decoration-none">Login here</a>
+          </p>
+        </div>
       </div>
-      }
     </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" formControlName="email" [disabled]="isLoading">
-      @if (emailError) {
-      <div class="error">
-        {{ emailError }}
-      </div>
-      }
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" formControlName="password" [disabled]="isLoading">
-      @if (passwordError) {
-      <div class="error">
-        {{ passwordError }}
-      </div>
-      }
-      <small>Minimum 6 characters</small>
-    </div>
-
-    <div class="form-group">
-      <label>I am a:</label>
-      <div class="role-selection">
-        <label class="role-option">
-          <input type="radio" formControlName="role" value="renter" [disabled]="isLoading">
-          <span class="role-label">
-            <strong>Renter</strong>
-            <small>{{ getRoleDescription('renter') }}</small>
-          </span>
-        </label>
-        <label class="role-option">
-          <input type="radio" formControlName="role" value="owner" [disabled]="isLoading">
-          <span class="role-label">
-            <strong>Owner</strong>
-            <small>{{ getRoleDescription('owner') }}</small>
-          </span>
-        </label>
-      </div>
-    </div>
-
-    <button type="submit" [disabled]="registerForm.invalid || isLoading">
-      @if (!isLoading) {
-      <span>Create Account</span>
-      }
-      @if (isLoading) {
-      <span>Creating Account...</span>
-      }
-    </button>
-  </form>
-
-  <p class="login-link">
-    Already have an account? <a routerLink="/login">Login here</a>
-  </p>
+  </div>
 </div>

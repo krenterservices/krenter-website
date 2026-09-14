@@ -52,11 +52,16 @@
             </a>
           </li>
 
-          <!-- Owner Links -->
-          @if (currentUser?.role === 'owner') {
+          <!-- Owner / Manager Links -->
+          @if (isOwner || isManager) {
           <li class="nav-item">
             <a class="nav-link px-3 fw-medium text-dark" routerLink="/my-properties" routerLinkActive="active" (click)="closeMenu()">
               My Properties
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-3 fw-medium text-dark" routerLink="/onboard-owner" routerLinkActive="active" (click)="closeMenu()">
+              Onboard Property
             </a>
           </li>
           <li class="nav-item">
@@ -67,10 +72,19 @@
           }
 
           <!-- Renter Links -->
-          @if (currentUser?.role === 'renter') {
+          @if (isRenter) {
           <li class="nav-item">
             <a class="nav-link px-3 fw-medium text-dark" routerLink="/my-rentals" routerLinkActive="active" (click)="closeMenu()">
               My Rentals
+            </a>
+          </li>
+          }
+
+          <!-- Admin Links -->
+          @if (isAdmin) {
+          <li class="nav-item">
+            <a class="nav-link px-3 fw-medium text-danger" routerLink="/admin/deletion-requests" routerLinkActive="active" (click)="closeMenu()">
+              <i class="bi bi-shield-lock me-1"></i>Deletion Requests
             </a>
           </li>
           }
@@ -104,7 +118,7 @@
             <div class="d-flex flex-column lh-1 pe-2">
               <span class="small fw-semibold text-dark">{{ currentUser.name }}</span>
               <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill role-badge">
-                {{ currentUser.role | uppercase }}
+                {{ roleBadgeText }}
               </span>
             </div>
           </div>
