@@ -11,7 +11,12 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 const angularApp = new AngularNodeAppEngine({
-  allowedHosts: ['krenter.org', 'www.krenter.org', 'krenter-website-899220204247.us-east4.run.app'],
+  allowedHosts: [
+    'krenter.org',
+    'www.krenter.org',
+    'krenter-website-899220204247.us-east4.run.app',
+    'krenter-website--krenter-prod.us-east4.hosted.app',
+  ],
 });
 
 /**
