@@ -1,59 +1,22 @@
-# KrenterWebsite
+# KRenter Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.7.
+KRenter website
 
-## Development server
 
-To start a local development server, run:
+### Domain config for firebase & Squarespace:
 
-```bash
-ng serve
-```
+the domain details need to be inserted in the squarespace like this. Or else it will not work. look into the names `A --> @`,   `CNAME --> only subdomain and .krenter.org removed  ` and for the `TXT --> @`.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Firebase app domain config will ask to add the entire name for each of them but it did not work. as domain config takes time like 24 hours you will wait a lot to get t working.
 
-## Code scaffolding
+When adding the domain firebase will give you full domain name, just copy the subdomain part and put it in the squarespace domain config. For example, if firebase gives you `_acme-challenge_tko4xnq2rja5zoh7.krenter.org` then you will only put `_acme-challenge_tko4xnq2rja5zoh7` in the squarespace domain config.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Type  | Name                              | Priority | TTL     | Data                                                                          |
+|-------|-----------------------------------|----------|---------|-------------------------------------------------------------------------------|
+| A     | @                                 | N/A      | 30 mins | 35.219.200.198                                                                 |
+| CNAME | _acme-challenge_tko4xnq2rja5zoh7 | N/A      | 30 mins | 3b6444db-0e2c-437a-982d-deaddb0ed1e9.19.authorize.certificatemanager.goog      |
+| TXT   | @                                 | N/A      | 30 mins | fah-claim=023-02-ec2b4f34-b018-4cd3-b4af-1c485ab0fa11                         |
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
 ## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
